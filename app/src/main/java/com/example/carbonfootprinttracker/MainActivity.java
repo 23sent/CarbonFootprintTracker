@@ -11,6 +11,8 @@ import android.widget.Button;
 public class MainActivity extends AppCompatActivity {
     static final String TAG = "MainActivity";
     Button addEmissionBtn;
+    Button viewEmissionsBtn;
+    CarbonFootprintTracker app = CarbonFootprintTracker.getInstance();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -18,10 +20,15 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         addEmissionBtn = (Button) findViewById(R.id.addEmissionBtn);
-        addEmissionBtn.setOnClickListener((View v)-> {
+        addEmissionBtn.setOnClickListener((View v) -> {
             Log.d(TAG, "onClick: addEmissionBtn");
             Intent intent = new Intent(this, AddEmissionActivity.class);
             startActivity(intent);
+        });
+
+        viewEmissionsBtn = (Button) findViewById(R.id.viewEmissionsBtn);
+        viewEmissionsBtn.setOnClickListener((View v) -> {
+            Log.d(TAG, app.toString());
         });
     }
 }
