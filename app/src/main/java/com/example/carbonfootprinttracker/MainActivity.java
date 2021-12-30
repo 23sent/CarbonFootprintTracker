@@ -7,12 +7,15 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
     static final String TAG = "MainActivity";
     Button addEmissionBtn;
     Button viewEmissionsBtn;
     CarbonFootprintTracker app = CarbonFootprintTracker.getInstance();
+    TextView dailyEmissionsTxt;
+    TextView monthlyEmissionTxt;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,5 +33,15 @@ public class MainActivity extends AppCompatActivity {
         viewEmissionsBtn.setOnClickListener((View v) -> {
             Log.d(TAG, app.toString());
         });
+
+        dailyEmissionsTxt = (TextView) findViewById(R.id.dailyEmissionTxt);
+        monthlyEmissionTxt = (TextView) findViewById(R.id.monthlyEmissionTxt);
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        dailyEmissionsTxt.setText(String.valueOf(app.getDailyEmission()));
+        monthlyEmissionTxt.setText(String.valueOf(app.getMonthlyEmission()));
     }
 }

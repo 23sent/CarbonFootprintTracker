@@ -8,8 +8,10 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.CarbonFootprintTracker"
-        >
+        android:theme="@style/Theme.CarbonFootprintTracker">
+        <activity
+            android:name=".ViewEmissionsActivity"
+            android:exported="true" />
         <activity
             android:name=".AddTransportationEmissionActivity"
             android:exported="true" />

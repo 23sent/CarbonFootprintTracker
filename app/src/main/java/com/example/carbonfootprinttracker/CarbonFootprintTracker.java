@@ -3,12 +3,10 @@ package com.example.carbonfootprinttracker;
 import java.util.ArrayList;
 
 public class CarbonFootprintTracker {
-    private static CarbonFootprintTracker instance;
-
     private ArrayList<Emission> emissions = new ArrayList<>();
 
+    private static CarbonFootprintTracker instance;
     private CarbonFootprintTracker() {}
-
     public static CarbonFootprintTracker getInstance() {
         if (instance == null) {
             instance = new CarbonFootprintTracker();
@@ -26,6 +24,22 @@ public class CarbonFootprintTracker {
 
     public void updateEmissions(Emission e) {
 
+    }
+
+    public int getDailyEmission() {
+        int total = 0;
+        for(Emission e : emissions) {
+            total = total + e.getQuantity();
+        }
+        return total;
+    }
+
+    public int getMonthlyEmission() {
+        int total = 0;
+        for(Emission e : emissions) {
+            total = total + e.getQuantity();
+        }
+        return total;
     }
 
     @Override
