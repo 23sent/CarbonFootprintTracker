@@ -39,13 +39,13 @@
                 android:text="Transportation" />
 
             <Button
-                android:id="@+id/button2"
+                android:id="@+id/addEnergyBtn"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Energy &amp; Natural Resources" />
 
             <Button
-                android:id="@+id/button3"
+                android:id="@+id/addAgricultureBtn"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Agriculture &amp; Single Use Products" />

@@ -9,10 +9,14 @@
         <entry key="..\:/Users/23sent/AndroidStudioProjects/CarbonFootprintTracker/app/src/main/res/layout/activity_view_emissions.xml" value="0.3234375" />
         <entry key="..\:/Users/23sent/AndroidStudioProjects/CarbonFootprintTracker/app/src/main/res/layout/app_bar_layout.xml" value="0.38697916666666665" />
         <entry key="..\:/Users/23sent/AndroidStudioProjects/CarbonFootprintTracker/app/src/main/res/menu/app_bar_menu.xml" value="0.38697916666666665" />
+        <entry key="app/src/main/res/layout/activity_add_emission.xml" value="0.15070921985815602" />
+        <entry key="app/src/main/res/layout/activity_add_transportation_emission.xml" value="0.13179347826086957" />
+        <entry key="app/src/main/res/layout/activity_energy.xml" value="0.13179347826086957" />
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.1" />
       </map>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="1.8" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" project-jdk-name="1.8" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
   <component name="ProjectType">

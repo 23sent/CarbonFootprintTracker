@@ -12,6 +12,8 @@ import android.widget.Button;
 
 public class AddEmissionActivity extends AppCompatActivity {
     Button addTransportationBtn;
+    Button addEnergyBtn;
+    Button addAgricultureBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,6 +24,12 @@ public class AddEmissionActivity extends AppCompatActivity {
         addTransportationBtn = (Button) findViewById(R.id.addTransportationBtn);
         addTransportationBtn.setOnClickListener((View v) -> {
             Intent intent = new Intent(this, AddTransportationEmissionActivity.class);
+            startActivity(intent);
+        });
+
+        addEnergyBtn = (Button) findViewById(R.id.addEnergyBtn);
+        addEnergyBtn.setOnClickListener((View v) -> {
+            Intent intent = new Intent(this, AddEnergyEmissionActivity.class);
             startActivity(intent);
         });
     }
