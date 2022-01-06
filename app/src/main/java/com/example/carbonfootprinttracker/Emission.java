@@ -3,31 +3,42 @@ package com.example.carbonfootprinttracker;
 import java.util.Date;
 
 public class Emission {
-    private int quantity = 0;
-    private int cfFactor = 2;
+    private float quantity = 0;
     private float carbonFootprint = 0;
     private Date date;
+    private EmissionTypes.Type type = null;
 
     public Emission() {
         date = new Date();
         calculateCarbonFootprint();
     }
 
-    public void setQuantity(int quantity) {
+
+    public void setQuantity(float quantity) {
         this.quantity = quantity;
         calculateCarbonFootprint();
     }
 
+    public float getQuantity() {
+        return quantity;
+    }
+
+    public void setType(EmissionTypes.Type type) {
+        this.type = type;
+        calculateCarbonFootprint();
+    }
+
+    public EmissionTypes.Type getType() {
+        return type;
+    }
+
+
     public void setDate(Date d) {
         this.date = d;
-    };
+    }
 
     public Date getDate() {
         return date;
-    }
-
-    public int getQuantity() {
-        return quantity;
     }
 
     public float getCarbonFootprint() {
@@ -35,8 +46,13 @@ public class Emission {
     }
 
     public void calculateCarbonFootprint() {
-        this.carbonFootprint = this.cfFactor * this.quantity;
+        if (this.type != null && this.quantity > 0) {
+            this.carbonFootprint = this.type.factor * this.quantity;
+        } else {
+            this.carbonFootprint = 0;
+        }
     }
+
 
     @Override
     public String toString() {
