@@ -1,5 +1,7 @@
 package com.example.carbonfootprinttracker;
 
+import android.util.Log;
+
 import java.util.ArrayList;
 
 public class CarbonFootprintTracker {
@@ -19,6 +21,10 @@ public class CarbonFootprintTracker {
     }
 
     public void addEmissions(Emission e) {
+        float quantity = e.getQuantity();
+        String strQuantity= quantity + "";
+        Log.d("infoQuantity", strQuantity);
+
         this.emissions.add(e);
     }
 

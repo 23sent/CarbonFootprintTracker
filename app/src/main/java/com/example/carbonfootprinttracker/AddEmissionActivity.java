@@ -15,11 +15,12 @@ public class AddEmissionActivity extends AppCompatActivity {
     Button addEnergyBtn;
     Button addAgricultureBtn;
 
+    EmissionDBHandler dbHandler;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_emission);
-
 
         addTransportationBtn = (Button) findViewById(R.id.addTransportationBtn);
         addTransportationBtn.setOnClickListener((View v) -> {

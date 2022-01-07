@@ -9,11 +9,12 @@ public final class EmissionDBHelper {
         public static final String TABLE_NAME = "emission";
         public static final String COLUMN_NAME_ID = "id";
         public static final String COLUMN_NAME_CREATED_AT = "created_at";
-        // Emission_Types = {Transportation, Energy, Agriculture}
-        public static final String COLUMN_NAME_TYPE = "type";
+        // Emission_Category = {Transportation, Energy, Agriculture}
+        public static final String COLUMN_NAME_CATEGORY = "category";
         // Emission_Product_Types = {Car, Plane, Electricity, LPG, Bottled Water, Bread}
-        public static final String COLUMN_NAME_PRODUCT_TYPE = "product_type";
+        public static final String COLUMN_NAME_PRODUCT_TYPE = "type";
         public static final String COLUMN_NAME_QUANTITY = "quantity";
+        // calculated emission amount
         public static final String COLUMN_NAME_TOTAL = "total";
     }
 }

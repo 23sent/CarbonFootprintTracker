@@ -1,24 +1,34 @@
 package com.example.carbonfootprinttracker;
 
+import static com.example.carbonfootprinttracker.EmissionDBHelper.EmissionEntry.COLUMN_NAME_CATEGORY;
+import static com.example.carbonfootprinttracker.EmissionDBHelper.EmissionEntry.COLUMN_NAME_CREATED_AT;
+import static com.example.carbonfootprinttracker.EmissionDBHelper.EmissionEntry.COLUMN_NAME_PRODUCT_TYPE;
+import static com.example.carbonfootprinttracker.EmissionDBHelper.EmissionEntry.COLUMN_NAME_QUANTITY;
+import static com.example.carbonfootprinttracker.EmissionDBHelper.EmissionEntry.COLUMN_NAME_TOTAL;
+import static com.example.carbonfootprinttracker.EmissionDBHelper.EmissionEntry.TABLE_NAME;
+
+import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
 public class EmissionDBHandler extends SQLiteOpenHelper {
     public static final int DB_VERSION = 1;
     public static final String DB_NAME = "emission.db";
 
     private final String SQL_CREATE_EMISSION_TABLE = "CREATE TABLE IF NOT EXISTS " +
-            EmissionDBHelper.EmissionEntry.TABLE_NAME + "(" +
+            TABLE_NAME + "(" +
             EmissionDBHelper.EmissionEntry.COLUMN_NAME_ID + " INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, " +
-            EmissionDBHelper.EmissionEntry.COLUMN_NAME_CREATED_AT + " DATETIME NOT NULL, " +
-            EmissionDBHelper.EmissionEntry.COLUMN_NAME_TYPE + " INTEGER NOT NULL, " +
-            EmissionDBHelper.EmissionEntry.COLUMN_NAME_PRODUCT_TYPE + " INTEGER NOT NULL, " +
+            EmissionDBHelper.EmissionEntry.COLUMN_NAME_CREATED_AT + " TEXT NOT NULL, " +
+            EmissionDBHelper.EmissionEntry.COLUMN_NAME_CATEGORY + " TEXT NOT NULL, " +
+            EmissionDBHelper.EmissionEntry.COLUMN_NAME_PRODUCT_TYPE + " TEXT NOT NULL, " +
             EmissionDBHelper.EmissionEntry.COLUMN_NAME_QUANTITY + " REAL NOT NULL," +
             EmissionDBHelper.EmissionEntry.COLUMN_NAME_TOTAL + " REAL NOT NULL"+  ")";
 
     private final String SQL_DELETE_EMISSION_TABLE = "DROP TABLE IF EXISTS " +
-            EmissionDBHelper.EmissionEntry.TABLE_NAME;
+            TABLE_NAME;
 
     public EmissionDBHandler(Context context) {
         super (context, DB_NAME, null, DB_VERSION);
@@ -38,5 +48,27 @@ public class EmissionDBHandler extends SQLiteOpenHelper {
     @Override
     public void onDowngrade(SQLiteDatabase sqLiteDatabase, int oldVersion, int newVersion) {
         onUpgrade(sqLiteDatabase, oldVersion, newVersion);
+    }
+
+    public float getTotalEmission() {
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        return 0;
+    }
+
+    public Emission insertEmission(Emission e) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+
+        values.put(COLUMN_NAME_QUANTITY, e.getQuantity());
+        values.put(COLUMN_NAME_CREATED_AT, String.valueOf(e.getDate()));
+        values.put(COLUMN_NAME_CATEGORY, String.valueOf(e.getType().category));
+        values.put(COLUMN_NAME_PRODUCT_TYPE, String.valueOf(e.getType()));
+        values.put(COLUMN_NAME_TOTAL, e.getCarbonFootprint());
+
+        long newRowId = db.insert(TABLE_NAME, null, values);
+
+        Log.d("DB Insert", "New Emission Inserted to the DB with ID: " + newRowId);
+        return e;
     }
 }
