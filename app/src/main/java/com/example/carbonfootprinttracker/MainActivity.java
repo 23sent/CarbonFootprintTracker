@@ -45,6 +45,9 @@ public class MainActivity extends AppCompatActivity {
         viewEmissionsBtn = (Button) findViewById(R.id.viewEmissionsBtn);
         viewEmissionsBtn.setOnClickListener((View v) -> {
             Log.d(TAG, app.toString());
+            Log.d(TAG, "onClick: viewEmissionBtn");
+            Intent intent = new Intent(this, ViewEmissionsActivity.class);
+            startActivity(intent);
         });
 
         dailyEmissionsTxt = (TextView) findViewById(R.id.dailyEmissionTxt);
