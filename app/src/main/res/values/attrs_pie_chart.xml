@@ -1,0 +1,9 @@
+<resources>
+    <declare-styleable name="PieChart">
+        <attr name="backcircle_color" format="color"/>
+        <attr name="backcircle_width" format="dimension"/>
+        <attr name="text_color" format="color"/>
+        <attr name="text_size" format="dimension"/>
+        <attr name="text" format="string"/>
+    </declare-styleable>
+</resources>

@@ -4,11 +4,14 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+
+import com.example.carbonfootprinttracker.Graphs.PieChart;
 
 import java.util.ArrayList;
 
@@ -21,6 +24,9 @@ public class MainActivity extends AppCompatActivity {
     TextView monthlyEmissionTxt;
 
     EmissionDBHandler dbHandler;
+
+    PieChart dailyPieChart;
+    PieChart monthlyPieChart;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +49,10 @@ public class MainActivity extends AppCompatActivity {
 
         dailyEmissionsTxt = (TextView) findViewById(R.id.dailyEmissionTxt);
         monthlyEmissionTxt = (TextView) findViewById(R.id.monthlyEmissionTxt);
+
+        dailyPieChart = (PieChart) findViewById(R.id.dailyPieChart);
+        dailyPieChart.setBackCircleColor(Color.argb(50, 0, 0, 0));
+        setDailyPieChart();
     }
 
     @Override
@@ -51,5 +61,10 @@ public class MainActivity extends AppCompatActivity {
         ArrayList<Emission> emissions = dbHandler.getAllEmissions();
         dailyEmissionsTxt.setText(String.valueOf(app.getDailyEmission(emissions)));
         monthlyEmissionTxt.setText(String.valueOf(app.getMonthlyEmission()));
+    }
+
+    private void setDailyPieChart() {
+        PieChart.PieSlice slice = new PieChart.PieSlice(Color.GRAY, 150);
+        dailyPieChart.addPieSlice(slice);
     }
 }
