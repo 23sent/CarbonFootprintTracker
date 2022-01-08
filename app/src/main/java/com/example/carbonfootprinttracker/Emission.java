@@ -1,5 +1,6 @@
 package com.example.carbonfootprinttracker;
 
+import java.util.ArrayList;
 import java.util.Date;
 
 public class Emission {
@@ -13,6 +14,12 @@ public class Emission {
         calculateCarbonFootprint();
     }
 
+    public Emission(float quantity, float carbonFootprint, Date date, EmissionTypes.Type type) {
+        this.quantity = quantity;
+        this.carbonFootprint = carbonFootprint;
+        this.date = date;
+        this.type = type;
+    }
 
     public void setQuantity(float quantity) {
         this.quantity = quantity;
@@ -31,7 +38,6 @@ public class Emission {
     public EmissionTypes.Type getType() {
         return type;
     }
-
 
     public void setDate(Date d) {
         this.date = d;
@@ -52,7 +58,6 @@ public class Emission {
             this.carbonFootprint = 0;
         }
     }
-
 
     @Override
     public String toString() {

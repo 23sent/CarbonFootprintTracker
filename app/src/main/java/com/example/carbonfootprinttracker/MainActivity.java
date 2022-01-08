@@ -10,6 +10,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+
 public class MainActivity extends AppCompatActivity {
     static final String TAG = "MainActivity";
     Button addEmissionBtn;
@@ -18,10 +20,14 @@ public class MainActivity extends AppCompatActivity {
     TextView dailyEmissionsTxt;
     TextView monthlyEmissionTxt;
 
+    EmissionDBHandler dbHandler;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        dbHandler = new EmissionDBHandler(this);
 
         addEmissionBtn = (Button) findViewById(R.id.addEmissionBtn);
         addEmissionBtn.setOnClickListener((View v) -> {
@@ -42,7 +48,8 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        dailyEmissionsTxt.setText(String.valueOf(app.getDailyEmission()));
+        ArrayList<Emission> emissions = dbHandler.getAllEmissions();
+        dailyEmissionsTxt.setText(String.valueOf(app.getDailyEmission(emissions)));
         monthlyEmissionTxt.setText(String.valueOf(app.getMonthlyEmission()));
     }
 }

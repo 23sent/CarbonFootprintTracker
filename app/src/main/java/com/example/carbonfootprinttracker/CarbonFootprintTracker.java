@@ -32,12 +32,13 @@ public class CarbonFootprintTracker {
 
     }
 
-    public float getDailyEmission() {
-        float total = 0;
-        for(Emission e : emissions) {
-            total = total + e.getQuantity();
+    public float getDailyEmission(ArrayList<Emission> emissions) {
+        float totalEmission = 0;
+        for (Emission emission : emissions) {
+            totalEmission += emission.getCarbonFootprint();
         }
-        return total;
+
+        return totalEmission;
     }
 
     public float getMonthlyEmission() {

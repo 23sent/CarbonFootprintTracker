@@ -14,6 +14,13 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import java.util.Locale;
+
 public class EmissionDBHandler extends SQLiteOpenHelper {
     public static final int DB_VERSION = 1;
     public static final String DB_NAME = "emission.db";
@@ -50,10 +57,48 @@ public class EmissionDBHandler extends SQLiteOpenHelper {
         onUpgrade(sqLiteDatabase, oldVersion, newVersion);
     }
 
-    public float getTotalEmission() {
+    public ArrayList<Emission> getAllEmissions() {
         SQLiteDatabase db = this.getReadableDatabase();
 
-        return 0;
+        String[] projection = {
+                COLUMN_NAME_CREATED_AT,
+                COLUMN_NAME_CATEGORY,
+                COLUMN_NAME_QUANTITY,
+                COLUMN_NAME_PRODUCT_TYPE,
+                COLUMN_NAME_TOTAL,
+        };
+
+//        String selection = COLUMN_NAME_CREATED_AT + " = ?";
+
+        String orderBy = COLUMN_NAME_CREATED_AT + " DESC";
+
+        Cursor cursor = db.query(
+                TABLE_NAME,
+                projection,
+                null,
+                null,
+                null,
+                null,
+                orderBy
+        );
+
+        ArrayList emissions = new ArrayList<Emission>();
+        while (cursor.moveToNext()) {
+            float quantity = cursor.getFloat(cursor.getColumnIndexOrThrow(COLUMN_NAME_QUANTITY));
+            String createdAt = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_NAME_CREATED_AT));
+            String category = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_NAME_CATEGORY));
+            String type = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_NAME_PRODUCT_TYPE));
+            float total = cursor.getFloat(cursor.getColumnIndexOrThrow(COLUMN_NAME_TOTAL));
+
+            EmissionTypes.Type emissionType = EmissionTypes.Type.valueOf(type);
+
+            Log.d("Get All Emission, Emission:", "quantity: " + quantity + " createdAt: "
+                    + createdAt + " category: " + category + " type: " + type + " total: " + total);
+            Emission e = new Emission(quantity, total, convertStringToDate(createdAt), emissionType);
+            emissions.add(e);
+        }
+
+        return emissions;
     }
 
     public Emission insertEmission(Emission e) {
@@ -70,5 +115,18 @@ public class EmissionDBHandler extends SQLiteOpenHelper {
 
         Log.d("DB Insert", "New Emission Inserted to the DB with ID: " + newRowId);
         return e;
+    }
+
+    private Date convertStringToDate(String strDate) {
+        Date date;
+        SimpleDateFormat formatter = new SimpleDateFormat("dd mm yyyy", Locale.ENGLISH);
+        try {
+            date = formatter.parse(strDate);
+        } catch (Exception e) {
+            Log.e("Convert String To Date", "Error while converting string to date: " + e.toString());
+            return null;
+        }
+
+        return date;
     }
 }
