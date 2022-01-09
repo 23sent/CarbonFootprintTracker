@@ -15,7 +15,6 @@ public class CarbonFootprintTracker {
         emissions = dbHandler.getAllEmissions();
     }
 
-
     public static CarbonFootprintTracker getInstance() {
         if (instance == null) {
             instance = new CarbonFootprintTracker();

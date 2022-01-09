@@ -106,7 +106,7 @@ public class EmissionDBHandler extends SQLiteOpenHelper {
         ContentValues values = new ContentValues();
 
         values.put(COLUMN_NAME_QUANTITY, e.getQuantity());
-        values.put(COLUMN_NAME_CREATED_AT, String.valueOf(e.getDate()));
+        values.put(COLUMN_NAME_CREATED_AT, String.valueOf(e.getDateString()));
         values.put(COLUMN_NAME_CATEGORY, String.valueOf(e.getType().category));
         values.put(COLUMN_NAME_PRODUCT_TYPE, String.valueOf(e.getType()));
         values.put(COLUMN_NAME_TOTAL, e.getCarbonFootprint());
