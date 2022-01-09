@@ -11,6 +11,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.CarbonFootprintTracker">
         <activity
+            android:name=".EmissionDetails"
+            android:exported="true" />
+        <activity
             android:name=".AddEnergyEmissionActivity"
             android:exported="false" />
         <activity
