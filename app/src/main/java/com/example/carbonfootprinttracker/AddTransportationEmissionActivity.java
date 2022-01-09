@@ -118,7 +118,7 @@ public class AddTransportationEmissionActivity extends AppCompatActivity {
     }
 
     public void setDateTxt(int year, int month, int day) {
-        Toast.makeText(this, "Year: " + year + ", Month: " + month + ", Day: " + day, Toast.LENGTH_SHORT).show();
+//        Toast.makeText(this, "Year: " + year + ", Month: " + month + ", Day: " + day, Toast.LENGTH_SHORT).show();
 
         datePickerTxt.setText(day + "/" + month + "/" + year);
         Date newDate = new GregorianCalendar(year, month, day).getTime();

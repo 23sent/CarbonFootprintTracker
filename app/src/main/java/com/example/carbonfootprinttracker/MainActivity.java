@@ -22,12 +22,8 @@ public class MainActivity extends AppCompatActivity {
     Button addEmissionBtn;
     Button viewEmissionsBtn;
     CarbonFootprintTracker app;
-    TextView dailyEmissionsTxt;
-    TextView monthlyEmissionTxt;
 
 
-    PieChart dailyPieChart;
-    PieChart monthlyPieChart;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,24 +53,17 @@ public class MainActivity extends AppCompatActivity {
 //        dailyPieChart.setBackCircleColor(Color.argb(50, 0, 0, 0));
 //        setDailyPieChart();
 
-        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-        ft.add(R.id.dailyEmissionLayout, PieChartFragment.newInstance("Daily", "10kgCo2"));
-        ft.add(R.id.monthlyEmissionLayout, PieChartFragment.newInstance("Monthly", "15kgCo2"));
-        ft.add(R.id.emissionSavedLayout, PieChartFragment.newInstance("EmissionSaved", "15kgCo2"));
 
-        ft.commit();
     }
 
     @Override
     protected void onStart() {
         super.onStart();
-//        ArrayList<Emission> emissions = dbHandler.getAllEmissions();
-//        dailyEmissionsTxt.setText(String.valueOf(app.getDailyEmission()));
-//        monthlyEmissionTxt.setText(String.valueOf(app.getMonthlyEmission()));
+        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+        ft.add(R.id.dailyEmissionLayout, PieChartFragment.newInstance("Daily", app.getDailyEmission()+" kgCO2", "", new ArrayList<PieChart.PieSlice>()));
+        ft.add(R.id.monthlyEmissionLayout, PieChartFragment.newInstance("Monthly", app.getMonthlyEmission()+" kgCO2", "", new ArrayList<PieChart.PieSlice>()));
+        ft.add(R.id.emissionSavedLayout, PieChartFragment.newInstance("Saved", "15 kgCo2", "", new ArrayList<PieChart.PieSlice>()));
+        ft.commit();
     }
 
-    private void setDailyPieChart() {
-        PieChart.PieSlice slice = new PieChart.PieSlice(Color.GRAY, 150);
-        dailyPieChart.addPieSlice(slice);
-    }
 }

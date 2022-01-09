@@ -4,6 +4,7 @@ import android.widget.Toast;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 
 public class Emission {
@@ -13,7 +14,7 @@ public class Emission {
     private EmissionTypes.Type type = null;
 
     public Emission() {
-        date = new Date();
+        setDate(Calendar.getInstance().getTime());
         calculateCarbonFootprint();
     }
 
@@ -44,7 +45,7 @@ public class Emission {
 
     public void setDate(Date d) {
         this.date = d;
-//        Toast.makeText(CFTApp.getContext(), getDateString(), Toast.LENGTH_SHORT).show();
+        Toast.makeText(CFTApp.getContext(), getDateString(), Toast.LENGTH_SHORT).show();
     }
 
     public Date getDate() {
