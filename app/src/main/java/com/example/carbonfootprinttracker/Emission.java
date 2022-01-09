@@ -13,13 +13,15 @@ public class Emission implements Serializable {
     private float carbonFootprint = 0;
     private Date date;
     private EmissionTypes.Type type = null;
+    private long id;
 
     public Emission() {
         setDate(Calendar.getInstance().getTime());
         calculateCarbonFootprint();
     }
 
-    public Emission(float quantity, float carbonFootprint, Date date, EmissionTypes.Type type) {
+    public Emission(long id, float quantity, float carbonFootprint, Date date, EmissionTypes.Type type) {
+        this.id = id;
         this.quantity = quantity;
         this.carbonFootprint = carbonFootprint;
         this.date = date;
@@ -63,6 +65,10 @@ public class Emission implements Serializable {
         } else {
             this.carbonFootprint = 0;
         }
+    }
+
+    public long getId() {
+        return id;
     }
 
     public String getDateString() {

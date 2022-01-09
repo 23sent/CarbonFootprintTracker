@@ -2,6 +2,7 @@ package com.example.carbonfootprinttracker;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -20,6 +21,8 @@ public class EmissionDetails extends AppCompatActivity {
     TextView emissionAmountTxt;
 
     Button deleteBtn;
+
+    CarbonFootprintTracker app;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,8 +48,17 @@ public class EmissionDetails extends AppCompatActivity {
 
         dateTxt.setText(emission.getDateString("EEEE, dd MMMM yyyy"));
 
+        app = CarbonFootprintTracker.getInstance();
+
         deleteBtn.setOnClickListener((View view) -> {
-            Toast.makeText(this, "Delete", Toast.LENGTH_SHORT).show();
+            this.onClickDelete();
+            Toast.makeText(this, "Emission is Deleted", Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(this, ViewEmissionsActivity.class);
+            startActivity(intent);
         });
+    }
+
+    public void onClickDelete() {
+        app.deleteEmission(emission);
     }
 }

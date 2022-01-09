@@ -138,12 +138,17 @@ public class CarbonFootprintTracker {
         return savedEmission(thisMonthEmission, previousMonthEmission);
     }
 
+    public void deleteEmission(Emission emission) {
+        dbHandler.deleteEmission(emission.getId());
+        this.emissions.remove(emission);
+    }
+
     public float savedEmission(float thisMonthEmission, float previousMonthEmission) {
         return thisMonthEmission - previousMonthEmission;
     }
 
     public ArrayList<Emission> getEmissions() {
-        return emissions;
+        return this.emissions;
     }
 
     @Override

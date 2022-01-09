@@ -23,9 +23,7 @@ public class MainActivity extends AppCompatActivity {
     Button addEmissionBtn;
     Button viewEmissionsBtn;
     CarbonFootprintTracker app;
-
-
-
+    
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -66,7 +64,11 @@ public class MainActivity extends AppCompatActivity {
         float dailyEmission = cftThread.getDailyEmission();
         float monthlyEmission = cftThread.getMonthlyEmission();
         float savedEmission = cftThread.getSavedEmission();
-        float convertedSavedEmission = savedEmission * -1;
+        float convertedSavedEmission = savedEmission;
+        if (savedEmission != 0) {
+            convertedSavedEmission = savedEmission * -1;
+        }
+
 
         ft.add(R.id.dailyEmissionLayout, PieChartFragment.newInstance("Daily", dailyEmission+" kgCO2", "", new ArrayList<PieChart.PieSlice>()));
         ft.add(R.id.monthlyEmissionLayout, PieChartFragment.newInstance("Monthly", monthlyEmission+" kgCO2", "", new ArrayList<PieChart.PieSlice>()));

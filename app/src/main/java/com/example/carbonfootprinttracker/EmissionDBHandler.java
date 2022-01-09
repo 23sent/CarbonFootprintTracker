@@ -2,6 +2,7 @@ package com.example.carbonfootprinttracker;
 
 import static com.example.carbonfootprinttracker.EmissionDBHelper.EmissionEntry.COLUMN_NAME_CATEGORY;
 import static com.example.carbonfootprinttracker.EmissionDBHelper.EmissionEntry.COLUMN_NAME_CREATED_AT;
+import static com.example.carbonfootprinttracker.EmissionDBHelper.EmissionEntry.COLUMN_NAME_ID;
 import static com.example.carbonfootprinttracker.EmissionDBHelper.EmissionEntry.COLUMN_NAME_PRODUCT_TYPE;
 import static com.example.carbonfootprinttracker.EmissionDBHelper.EmissionEntry.COLUMN_NAME_QUANTITY;
 import static com.example.carbonfootprinttracker.EmissionDBHelper.EmissionEntry.COLUMN_NAME_TOTAL;
@@ -63,14 +64,13 @@ public class EmissionDBHandler extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getReadableDatabase();
 
         String[] projection = {
+                COLUMN_NAME_ID,
                 COLUMN_NAME_CREATED_AT,
                 COLUMN_NAME_CATEGORY,
                 COLUMN_NAME_QUANTITY,
                 COLUMN_NAME_PRODUCT_TYPE,
                 COLUMN_NAME_TOTAL,
         };
-
-//        String selection = COLUMN_NAME_CREATED_AT + " = ?";
 
         String orderBy = COLUMN_NAME_CREATED_AT + " DESC";
 
@@ -86,6 +86,7 @@ public class EmissionDBHandler extends SQLiteOpenHelper {
 
         ArrayList emissions = new ArrayList<Emission>();
         while (cursor.moveToNext()) {
+            long id = cursor.getLong(cursor.getColumnIndexOrThrow(COLUMN_NAME_ID));
             float quantity = cursor.getFloat(cursor.getColumnIndexOrThrow(COLUMN_NAME_QUANTITY));
             String createdAt = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_NAME_CREATED_AT));
             String type = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_NAME_PRODUCT_TYPE));
@@ -96,7 +97,7 @@ public class EmissionDBHandler extends SQLiteOpenHelper {
             if (dateCreatedAt == null) {
                 continue;
             }
-            Emission e = new Emission(quantity, total, dateCreatedAt, emissionType);
+            Emission e = new Emission(id, quantity, total, dateCreatedAt, emissionType);
             emissions.add(e);
         }
         return emissions;
@@ -116,6 +117,15 @@ public class EmissionDBHandler extends SQLiteOpenHelper {
 
         Log.d("DB Insert", "New Emission Inserted to the DB with ID: " + newRowId);
         return e;
+    }
+
+    public void deleteEmission(long emissionId) {
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        String where = COLUMN_NAME_ID + " = ?";
+        String[] whereArgs = {String.valueOf(emissionId)};
+        int deletedRow = db.delete(TABLE_NAME, where, whereArgs);
+        Log.d("Emission Deleted", "deleted emission row: " + deletedRow);
     }
 
     private Date convertStringToDate(String strDate) {
