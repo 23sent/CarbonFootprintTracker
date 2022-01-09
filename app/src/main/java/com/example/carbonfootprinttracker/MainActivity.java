@@ -6,6 +6,7 @@ import androidx.fragment.app.FragmentTransaction;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -50,12 +51,28 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onStart() {
+        float dailyEmissions;
+        float monthlyEmissions;
+
         super.onStart();
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-        ft.add(R.id.dailyEmissionLayout, PieChartFragment.newInstance("Daily", app.getDailyEmission()+" kgCO2", "", new ArrayList<PieChart.PieSlice>()));
-        ft.add(R.id.monthlyEmissionLayout, PieChartFragment.newInstance("Monthly", app.getMonthlyEmission()+" kgCO2", "", new ArrayList<PieChart.PieSlice>()));
+
+        CFTThread cftThread = new CFTThread();
+        cftThread.setParams(app);
+        Thread getEmissionsThread = new Thread(cftThread);
+        getEmissionsThread.start();
+        try {
+            getEmissionsThread.join();
+        } catch (InterruptedException e) {
+            Log.e("CFTThread", "Error while joining cftThread: " + e.toString());
+        }
+
+        dailyEmissions = cftThread.getDailyEmission();
+        monthlyEmissions = cftThread.getMonthlyEmission();
+
+        ft.add(R.id.dailyEmissionLayout, PieChartFragment.newInstance("Daily", dailyEmissions+" kgCO2", "", new ArrayList<PieChart.PieSlice>()));
+        ft.add(R.id.monthlyEmissionLayout, PieChartFragment.newInstance("Monthly", monthlyEmissions+" kgCO2", "", new ArrayList<PieChart.PieSlice>()));
         ft.add(R.id.emissionSavedLayout, PieChartFragment.newInstance("Saved", "15 kgCo2", "", new ArrayList<PieChart.PieSlice>()));
         ft.commit();
     }
-
 }
