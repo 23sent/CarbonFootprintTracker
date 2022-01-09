@@ -71,7 +71,21 @@ public class CarbonFootprintTracker {
         LocalDate previousMonth = localDate.minusMonths(1);
 
         return emissionCreatedDate.isBefore(nextMonth) && emissionCreatedDate.isAfter(previousMonth);
+    }
 
+    public boolean isEmissionPreviousMonth(String emissionDate) {
+        if (emissionDate == null) {
+            return false;
+        }
+
+        final DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        final LocalDate emissionCreatedDate = LocalDate.parse(emissionDate, dtf);
+        Date todaysDate = new Date();
+        LocalDate localDate = todaysDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+        LocalDate previousMonth = localDate.minusMonths(1);
+        LocalDate previous2Month = localDate.minusMonths(2);
+
+        return emissionCreatedDate.isBefore(previousMonth) && emissionCreatedDate.isAfter(previous2Month);
     }
 
     public float getDailyEmission() {
@@ -100,6 +114,32 @@ public class CarbonFootprintTracker {
             }
         }
         return total;
+    }
+
+    public float getPreviousMonthlyEmission() {
+        float total = 0;
+        for(Emission emission: emissions) {
+            if (emission.getDate() == null) {
+                continue;
+            }
+
+            if (isEmissionPreviousMonth(emission.getDateString())) {
+                total += emission.getCarbonFootprint();
+            }
+        }
+
+        return total;
+    }
+
+    public float getSavedEmission() {
+        float thisMonthEmission = getMonthlyEmission();
+        float previousMonthEmission = getPreviousMonthlyEmission();
+
+        return savedEmission(thisMonthEmission, previousMonthEmission);
+    }
+
+    public float savedEmission(float thisMonthEmission, float previousMonthEmission) {
+        return thisMonthEmission - previousMonthEmission;
     }
 
     public ArrayList<Emission> getEmissions() {

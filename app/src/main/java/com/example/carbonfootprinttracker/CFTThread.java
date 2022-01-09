@@ -2,8 +2,9 @@ package com.example.carbonfootprinttracker;
 
 public class CFTThread implements CFTRunnable {
     CarbonFootprintTracker app;
-    float dailyEmission;
-    float monthlyEmission;
+    private float dailyEmission;
+    private float monthlyEmission;
+    private float savedEmission;
 
     @Override
     public void setParams(CarbonFootprintTracker app) {
@@ -13,6 +14,7 @@ public class CFTThread implements CFTRunnable {
     public void run() {
         this.dailyEmission = app.getDailyEmission();
         this.monthlyEmission = app.getMonthlyEmission();
+        this.savedEmission = app.getSavedEmission();
     }
 
     public float getDailyEmission() {
@@ -21,5 +23,9 @@ public class CFTThread implements CFTRunnable {
 
     public float getMonthlyEmission() {
         return monthlyEmission;
+    }
+
+    public float getSavedEmission() {
+        return savedEmission;
     }
 }
