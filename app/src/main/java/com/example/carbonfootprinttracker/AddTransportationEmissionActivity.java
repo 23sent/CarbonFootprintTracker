@@ -21,11 +21,15 @@ import android.widget.SpinnerAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import org.w3c.dom.Text;
+
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
 
 public class AddTransportationEmissionActivity extends AppCompatActivity {
+    private EmissionTypes.Category category = EmissionTypes.Category.TRANSPORT;
+
     DatePickerFragment dataPickerFragment;
     Spinner typeSpinner;
 
@@ -37,14 +41,17 @@ public class AddTransportationEmissionActivity extends AppCompatActivity {
     Emission emission = new Emission();
     CarbonFootprintTracker app;
 
-    List<EmissionTypes.Type> transporters = EmissionTypes.getTypes(EmissionTypes.Category.TRANSPORT);
+    List<EmissionTypes.Type> emissionTypes;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_transportation_emission);
+        category = (EmissionTypes.Category) getIntent().getExtras().getSerializable("category");
+        emissionTypes = EmissionTypes.getTypes(category);
 
+        initTypeText();
 
         app = CarbonFootprintTracker.getInstance();
         quantityInput = (EditText) findViewById(R.id.quantityInput);
@@ -93,20 +100,18 @@ public class AddTransportationEmissionActivity extends AppCompatActivity {
             }
         });
 
-        emission.setType(transporters.get(0));
+        emission.setType(emissionTypes.get(0));
 
-        String[] TRANSPORT_TYPES = EmissionTypes.getNames(transporters);
+        String[] TRANSPORT_TYPES = EmissionTypes.getNames(emissionTypes);
         ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_spinner_item, TRANSPORT_TYPES);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         typeSpinner.setAdapter(adapter);
-        typeSpinner.setSelection(transporters.indexOf(emission.getType()));
+        typeSpinner.setSelection(emissionTypes.indexOf(emission.getType()));
         typeSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                Log.d("Spinner selected", "onItemSelected: " + transporters.get(i));
-                emission.setType(transporters.get(i));
-                carbonEmissionTxt.setText(emission.getCarbonFootprint() + " kg CO2");
+                setType(emissionTypes.get(i));
             }
 
             @Override
@@ -115,14 +120,48 @@ public class AddTransportationEmissionActivity extends AppCompatActivity {
                 emission.setType(null);
             }
         });
+
+        Toast.makeText(this, "" + category.name, Toast.LENGTH_SHORT).show();
+    }
+
+    public void initTypeText() {
+        String typeText = "";
+        String headerText = "";
+        if (category == EmissionTypes.Category.TRANSPORT) {
+            typeText = "Transport";
+            headerText = "Transportation";
+        } else if (category == EmissionTypes.Category.ENERGY) {
+            typeText = "Energy or Resource";
+            headerText = "Natural Resources";
+        } else if (category == EmissionTypes.Category.AGRICULTURE) {
+            typeText = "Agriculture or Food";
+            headerText = "Agriculture & Food";
+        }
+        typeText += " Type";
+
+        TextView type = findViewById(R.id.type);
+        type.setText(typeText);
+
+        TextView header = findViewById(R.id.header);
+        header.setText(headerText);
+    }
+
+    public void setType(EmissionTypes.Type type) {
+        Log.d("Spinner selected", "onItemSelected: " + type);
+        emission.setType(type);
+        carbonEmissionTxt.setText(emission.getCarbonFootprint() + " kg CO2");
+
+        TextView unitHeader = findViewById(R.id.unitHeader);
+        unitHeader.setText(type.unit.tag);
+
+        TextView unitText = findViewById(R.id.unitText);
+        unitText.setText(type.unit.name);
     }
 
     public void setDateTxt(int year, int month, int day) {
-//        Toast.makeText(this, "Year: " + year + ", Month: " + month + ", Day: " + day, Toast.LENGTH_SHORT).show();
-
-        datePickerTxt.setText(day + "/" + month + "/" + year);
         Date newDate = new GregorianCalendar(year, month, day).getTime();
         emission.setDate(newDate);
+        datePickerTxt.setText(emission.getDateString());
     }
 
     public void onClickSave() {

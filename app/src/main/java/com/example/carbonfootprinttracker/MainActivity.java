@@ -46,14 +46,6 @@ public class MainActivity extends AppCompatActivity {
             startActivity(intent);
         });
 
-//        dailyEmissionsTxt = (TextView) findViewById(R.id.dailyEmissionTxt);
-//        monthlyEmissionTxt = (TextView) findViewById(R.id.monthlyEmissionTxt);
-//
-//        dailyPieChart = (PieChart) findViewById(R.id.dailyPieChart);
-//        dailyPieChart.setBackCircleColor(Color.argb(50, 0, 0, 0));
-//        setDailyPieChart();
-
-
     }
 
     @Override

@@ -18,11 +18,11 @@
         tools:layout_editor_absoluteX="20dp">
 
         <TextView
-            android:id="@+id/textView3"
+            android:id="@+id/header"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Transportation"
-            android:textSize="28sp"
+            style="@style/TextAppearance.AppCompat.Headline"
+            android:textSize="30sp"
             android:textAlignment="center"/>
 
         <LinearLayout
@@ -32,16 +32,16 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/textView"
+                android:id="@+id/type"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Transport Type"
-                android:textSize="16sp" />
+                android:text="Type"
+                style="@style/TextAppearance.AppCompat.Title" />
 
             <Spinner
                 android:id="@+id/transportTypeSpinner"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="@dimen/add_emission_row_height" />
 
         </LinearLayout>
 
@@ -52,22 +52,22 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/textView233"
+                android:id="@+id/unitHeader"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Distance"
-                android:textSize="16sp" />
+                android:text="Unit"
+                style="@style/TextAppearance.AppCompat.Title"
+               />
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="@dimen/add_emission_row_height"
                 android:orientation="horizontal">
 
                 <EditText
                     android:id="@+id/quantityInput"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="10dp"
                     android:layout_weight="1"
                     android:hint="0"
                     android:inputType="number"
@@ -75,10 +75,11 @@
                     android:textSize="20sp" />
 
                 <TextView
-                    android:id="@+id/postFix3"
+                    android:id="@+id/unitText"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="km"
+                    android:paddingLeft="2dp"
                     android:textSize="18sp" />
             </LinearLayout>
 
@@ -95,16 +96,18 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Date"
-                android:textSize="16sp" />
+                style="@style/TextAppearance.AppCompat.Title" />
 
             <TextView
                 android:id="@+id/datePickerTxt"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
                 android:layout_weight="1"
-                android:paddingStart="10dp"
+                android:paddingLeft="5dp"
+                android:layout_marginTop="7dp"
+                android:layout_marginBottom="7dp"
                 android:text="--/--/----"
-                android:textSize="18sp" />
+                android:textSize="20sp" />
 
         </LinearLayout>
 
@@ -112,8 +115,8 @@
             android:id="@+id/divider"
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:layout_marginTop="40dp"
-            android:layout_marginBottom="30dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="15dp"
             android:background="?android:attr/listDivider" />
 
         <TextView
@@ -121,7 +124,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Total Emission"
-            android:textSize="20sp"
+            style="@style/TextAppearance.AppCompat.Display1"
+
             />
 
         <TextView
@@ -145,7 +149,7 @@
             android:id="@+id/addBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Add" />
+            android:text="Save" />
 
     </LinearLayout>
 

@@ -23,14 +23,25 @@ public class AddEmissionActivity extends AppCompatActivity {
 
         addTransportationBtn = (Button) findViewById(R.id.addTransportationBtn);
         addTransportationBtn.setOnClickListener((View v) -> {
-            Intent intent = new Intent(this, AddTransportationEmissionActivity.class);
-            startActivity(intent);
+            startAddActivity(EmissionTypes.Category.TRANSPORT);
         });
 
         addEnergyBtn = (Button) findViewById(R.id.addEnergyBtn);
         addEnergyBtn.setOnClickListener((View v) -> {
-            Intent intent = new Intent(this, AddEnergyEmissionActivity.class);
-            startActivity(intent);
+            startAddActivity(EmissionTypes.Category.ENERGY);
         });
+
+        addAgricultureBtn = (Button) findViewById(R.id.addAgricultureBtn);
+        addAgricultureBtn.setOnClickListener((View v) -> {
+            startAddActivity(EmissionTypes.Category.AGRICULTURE);
+        });
+    }
+
+    private void startAddActivity(EmissionTypes.Category category) {
+        Bundle bundle = new Bundle();
+        bundle.putSerializable("category", category);
+        Intent intent = new Intent(this, AddTransportationEmissionActivity.class);
+        intent.putExtras(bundle);
+        startActivity(intent);
     }
 }
