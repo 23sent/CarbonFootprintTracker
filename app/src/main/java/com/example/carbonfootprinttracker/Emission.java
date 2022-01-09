@@ -1,5 +1,6 @@
 package com.example.carbonfootprinttracker;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -57,6 +58,25 @@ public class Emission {
         } else {
             this.carbonFootprint = 0;
         }
+    }
+
+    public String getDateString() {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-mm-dd");
+        if (this.date != null) {
+            return sdf.format(this.date);
+        }
+        return "-";
+    }
+
+    public String getCarbonFootprintString() {
+        return this.carbonFootprint+" kgCO2";
+    }
+
+    public String getTypeString() {
+        if (this.type != null) {
+            return type.category.name +" - "+type.name;
+        }
+        return "-";
     }
 
     @Override

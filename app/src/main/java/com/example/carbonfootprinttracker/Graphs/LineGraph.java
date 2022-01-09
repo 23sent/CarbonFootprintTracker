@@ -36,6 +36,10 @@ public class LineGraph extends View {
     private Paint gridLinePainter;
     private int xUnitCount = 7;
     private int yUnitCount = 100;
+    private float xCeil = 1;
+    private float yCeil = 1;
+    private float xFloor = 0;
+    private float yFloor = 0;
 
     private Paint textPaint;
     private Paint.FontMetricsInt fontMetrics;
@@ -102,8 +106,8 @@ public class LineGraph extends View {
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
 
-        float xUnit = ((float) (width - (2f * xPadding)) / xUnitCount);
-        float yUnit = ((float) (height - (2f * yPadding)) / yUnitCount);
+        float xUnit = ((float) (width - (2f * xPadding)) / (xCeil - xFloor));
+        float yUnit = ((float) (height - (2f * yPadding)) / (yCeil - yFloor));
 
         canvas.drawLine(xPadding, yPadding, xPadding, this.height - yPadding, axisPainter);//y-axis
         canvas.drawLine(xPadding, this.height - yPadding, this.width - xPadding, this.height - yPadding, axisPainter);//x-axis
@@ -111,7 +115,7 @@ public class LineGraph extends View {
 
         // Paint Gird Lines
         float startX;
-        for (int i = 0; i <= xUnitCount; i++) {
+        for (int i = 0; i <= plotPoints.size(); i++) {
             startX = (i * xUnit) + xPadding;
             canvas.drawLine(startX, yPadding, startX, height - yPadding, gridLinePainter);
         }
@@ -131,8 +135,8 @@ public class LineGraph extends View {
 
         for (PlotPoint point : plotPoints) {
             float x = originX + (point.getX() * xUnit);
-            plotLinePath.lineTo(x, originY - (point.getY() * yUnit));
-            canvas.drawCircle(x, originY - (point.getY() * yUnit), 5, plotLinePainter);
+            plotLinePath.lineTo(x, originY - ((point.getY() * yUnit) - (yFloor*yUnit)));
+            canvas.drawCircle(x, originY - ((point.getY() * yUnit) - (yFloor*yUnit)), 5, plotLinePainter);
             canvas.drawText(point.getLabel(),  x, this.height - fontMetrics.bottom, textPaint);
         }
         canvas.drawPath(plotLinePath, plotLinePainter);
@@ -148,8 +152,10 @@ public class LineGraph extends View {
 
     public void setPlotPoints(List<PlotPoint> plotPoints) {
         this.plotPoints = plotPoints;
-        float maxX = 0;
-        float maxY = 0;
+        float maxX = Float.NEGATIVE_INFINITY;
+        float maxY = Float.NEGATIVE_INFINITY;
+        float minX = Float.POSITIVE_INFINITY;
+        float minY = Float.POSITIVE_INFINITY;
         for (PlotPoint point : plotPoints) {
             if (point.getX() > maxX) {
                 maxX = point.getX();
@@ -157,7 +163,23 @@ public class LineGraph extends View {
             if (point.getY() > maxY) {
                 maxY = point.getY();
             }
+            if (point.getX() < minX) {
+                minX = point.getX();
+            }
+            if (point.getY() < minY) {
+                minY = point.getY();
+            }
         }
+        if (Float.isInfinite(maxX)) maxX = 1;
+        if (Float.isInfinite(maxY)) maxY = 1;
+        if (Float.isInfinite(minX)) minX = 0;
+        if (Float.isInfinite(minY)) minY = 0;
+
+        xCeil = maxX;
+        yCeil = maxY;
+        xFloor = minX;
+        yFloor = minY;
+
         xUnitCount = (int) Math.ceil(maxX);
         yUnitCount = (int) Math.ceil(maxY);
     }

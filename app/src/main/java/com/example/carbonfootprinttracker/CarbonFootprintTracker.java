@@ -5,10 +5,20 @@ import android.util.Log;
 import java.util.ArrayList;
 
 public class CarbonFootprintTracker {
-    private ArrayList<Emission> emissions = new ArrayList<>();
+    private ArrayList<Emission> emissions;
+    EmissionDBHandler dbHandler;
 
     private static CarbonFootprintTracker instance;
-    private CarbonFootprintTracker() {}
+    private CarbonFootprintTracker() {
+        emissions = new ArrayList<>();
+//        emissions = dbHandler.getAllEmissions();
+    }
+
+    public void setDbHandler(EmissionDBHandler dbHandler) {
+        this.dbHandler = dbHandler;
+        emissions = dbHandler.getAllEmissions();
+    }
+
     public static CarbonFootprintTracker getInstance() {
         if (instance == null) {
             instance = new CarbonFootprintTracker();
@@ -32,7 +42,7 @@ public class CarbonFootprintTracker {
 
     }
 
-    public float getDailyEmission(ArrayList<Emission> emissions) {
+    public float getDailyEmission() {
         float totalEmission = 0;
         for (Emission emission : emissions) {
             totalEmission += emission.getCarbonFootprint();
@@ -47,6 +57,10 @@ public class CarbonFootprintTracker {
             total = total + e.getQuantity();
         }
         return total;
+    }
+
+    public ArrayList<Emission> getEmissions() {
+        return emissions;
     }
 
     @Override

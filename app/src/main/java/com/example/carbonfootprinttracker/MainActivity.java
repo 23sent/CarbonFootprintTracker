@@ -34,6 +34,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         dbHandler = new EmissionDBHandler(this);
+        app.setDbHandler(dbHandler);
 
         addEmissionBtn = (Button) findViewById(R.id.addEmissionBtn);
         addEmissionBtn.setOnClickListener((View v) -> {
@@ -61,8 +62,8 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        ArrayList<Emission> emissions = dbHandler.getAllEmissions();
-        dailyEmissionsTxt.setText(String.valueOf(app.getDailyEmission(emissions)));
+//        ArrayList<Emission> emissions = dbHandler.getAllEmissions();
+        dailyEmissionsTxt.setText(String.valueOf(app.getDailyEmission()));
         monthlyEmissionTxt.setText(String.valueOf(app.getMonthlyEmission()));
     }
 

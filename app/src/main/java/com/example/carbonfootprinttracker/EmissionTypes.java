@@ -1,17 +1,17 @@
 package com.example.carbonfootprinttracker;
 
-import android.util.Log;
-
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-import java.util.concurrent.Callable;
-import java.util.function.Function;
+
 
 public class EmissionTypes {
 
     public enum Category {
-        TRANSPORT, ENERGY, AGRICULTURE
+        TRANSPORT("Transportation"), ENERGY("Natural Res."), AGRICULTURE("Agriculture & Food");
+        String name;
+        Category(String name) {
+            this.name = name;
+        }
     }
 
     public enum Type {
