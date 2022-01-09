@@ -19,11 +19,10 @@ public class MainActivity extends AppCompatActivity {
     static final String TAG = "MainActivity";
     Button addEmissionBtn;
     Button viewEmissionsBtn;
-    CarbonFootprintTracker app = CarbonFootprintTracker.getInstance();
+    CarbonFootprintTracker app;
     TextView dailyEmissionsTxt;
     TextView monthlyEmissionTxt;
 
-    EmissionDBHandler dbHandler;
 
     PieChart dailyPieChart;
     PieChart monthlyPieChart;
@@ -32,9 +31,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        dbHandler = new EmissionDBHandler(this);
-        app.setDbHandler(dbHandler);
+        app = CarbonFootprintTracker.getInstance();
 
         addEmissionBtn = (Button) findViewById(R.id.addEmissionBtn);
         addEmissionBtn.setOnClickListener((View v) -> {

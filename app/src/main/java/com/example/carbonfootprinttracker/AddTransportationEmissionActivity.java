@@ -38,14 +38,12 @@ public class AddTransportationEmissionActivity extends AppCompatActivity {
 
     List<EmissionTypes.Type> transporters = EmissionTypes.getTypes(EmissionTypes.Category.TRANSPORT);
 
-    EmissionDBHandler dbHandler;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_transportation_emission);
 
-        dbHandler = new EmissionDBHandler(this);
 
         app = CarbonFootprintTracker.getInstance();
         quantityInput = (EditText) findViewById(R.id.quantityInput);
@@ -125,7 +123,6 @@ public class AddTransportationEmissionActivity extends AppCompatActivity {
 
     public void onClickSave() {
         if (emission.getDate() != null && emission.getType() != null && emission.getQuantity() > 0) {
-            dbHandler.insertEmission(emission);
             app.addEmissions(emission);
             Log.d("Add Emission", emission.toString());
             finish();

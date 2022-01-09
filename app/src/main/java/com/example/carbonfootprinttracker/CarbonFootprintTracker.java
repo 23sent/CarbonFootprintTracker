@@ -11,13 +11,10 @@ public class CarbonFootprintTracker {
     private static CarbonFootprintTracker instance;
     private CarbonFootprintTracker() {
         emissions = new ArrayList<>();
-//        emissions = dbHandler.getAllEmissions();
-    }
-
-    public void setDbHandler(EmissionDBHandler dbHandler) {
-        this.dbHandler = dbHandler;
+        dbHandler = new EmissionDBHandler(CFTApp.getContext());
         emissions = dbHandler.getAllEmissions();
     }
+    
 
     public static CarbonFootprintTracker getInstance() {
         if (instance == null) {
@@ -35,6 +32,7 @@ public class CarbonFootprintTracker {
         String strQuantity= quantity + "";
         Log.d("infoQuantity", strQuantity);
 
+        dbHandler.insertEmission(e);
         this.emissions.add(e);
     }
 

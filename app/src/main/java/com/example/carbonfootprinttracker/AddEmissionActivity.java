@@ -15,7 +15,6 @@ public class AddEmissionActivity extends AppCompatActivity {
     Button addEnergyBtn;
     Button addAgricultureBtn;
 
-    EmissionDBHandler dbHandler;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
