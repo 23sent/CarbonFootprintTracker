@@ -30,7 +30,7 @@ public class ViewEmissionsRecyclerViewAdapter extends RecyclerView.Adapter<ViewE
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
         holder.mItem = mValues.get(position);
-        holder.date.setText(mValues.get(position).getDateString());
+        holder.date.setText(mValues.get(position).getDateString("dd MMM. yyyy"));
         holder.type.setText(mValues.get(position).getTypeString());
         holder.amount.setText(mValues.get(position).getCarbonFootprintString());
         holder.view.setOnClickListener((View view) -> {

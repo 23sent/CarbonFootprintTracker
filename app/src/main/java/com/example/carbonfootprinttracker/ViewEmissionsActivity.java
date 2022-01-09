@@ -3,6 +3,7 @@ package com.example.carbonfootprinttracker;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Toast;
 
@@ -41,6 +42,10 @@ public class ViewEmissionsActivity extends AppCompatActivity implements Emission
 
     @Override
     public void onEmissionSelected(Emission emission) {
-        Toast.makeText(this, "Emission: " + emission.getType(), Toast.LENGTH_SHORT).show();
+        Bundle bundle = new Bundle();
+        bundle.putSerializable("emission", emission);
+        Intent intent = new Intent(this, EmissionDetails.class);
+        intent.putExtras(bundle);
+        startActivity(intent);
     }
 }

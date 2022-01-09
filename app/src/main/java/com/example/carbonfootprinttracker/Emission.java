@@ -2,12 +2,13 @@ package com.example.carbonfootprinttracker;
 
 import android.widget.Toast;
 
+import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
-public class Emission {
+public class Emission implements Serializable {
     private float quantity = 0;
     private float carbonFootprint = 0;
     private Date date;
@@ -65,7 +66,11 @@ public class Emission {
     }
 
     public String getDateString() {
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        return getDateString("yyyy-MM-dd");
+    }
+
+    public String getDateString(String format) {
+        SimpleDateFormat sdf = new SimpleDateFormat(format);
         if (this.date != null) {
             return sdf.format(this.date);
         }
@@ -73,7 +78,7 @@ public class Emission {
     }
 
     public String getCarbonFootprintString() {
-        return this.carbonFootprint+" kgCO2";
+        return this.carbonFootprint+" kgCO2eq";
     }
 
     public String getTypeString() {
