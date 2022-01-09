@@ -8,7 +8,7 @@
     tools:context=".MainActivity">
 
 
-    <LinearLayout
+    <FrameLayout
         android:id="@+id/dailyEmissionLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -17,49 +17,32 @@
         app:layout_constraintBottom_toTopOf="@+id/monthlyEmissionLayout"
         app:layout_constraintTop_toTopOf="parent">
 
-        <com.example.carbonfootprinttracker.Graphs.PieChart
-            android:id="@+id/dailyPieChart"
-            android:layout_width="120dp"
-            android:layout_height="120dp"
-            app:backcircle_width="10dp"
-            app:text="Daily"/>
+    </FrameLayout>
 
-        <TextView
-            android:id="@+id/dailyEmissionTxt"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text=""
-            android:textAlignment="viewEnd"
-            android:textSize="34sp" />
-
-    </LinearLayout>
-
-    <LinearLayout
+    <FrameLayout
         android:id="@+id/monthlyEmissionLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toTopOf="@+id/emissionSavedLayout"
+        app:layout_constraintTop_toBottomOf="@+id/dailyEmissionLayout">
+
+
+    </FrameLayout>
+
+    <FrameLayout
+        android:id="@+id/emissionSavedLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
         android:orientation="horizontal"
         app:layout_constraintBottom_toTopOf="@+id/addEmissionBtn"
-        app:layout_constraintTop_toBottomOf="@+id/dailyEmissionLayout"
-        android:gravity="center">
+        app:layout_constraintTop_toBottomOf="@+id/monthlyEmissionLayout">
 
-        <com.example.carbonfootprinttracker.Graphs.PieChart
-            android:id="@+id/monthlyPieChart"
-            android:layout_width="120dp"
-            android:layout_height="120dp"
-            app:backcircle_width="10dp"
-            app:text="Monthly"/>
 
-        <TextView
-            android:id="@+id/monthlyEmissionTxt"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text=""
-            android:textAlignment="viewEnd"
-            android:textSize="34sp" />
-    </LinearLayout>
+    </FrameLayout>
+
 
     <Button
         android:id="@+id/addEmissionBtn"

@@ -1,5 +1,7 @@
 package com.example.carbonfootprinttracker;
 
+import android.widget.Toast;
+
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -42,6 +44,7 @@ public class Emission {
 
     public void setDate(Date d) {
         this.date = d;
+//        Toast.makeText(CFTApp.getContext(), getDateString(), Toast.LENGTH_SHORT).show();
     }
 
     public Date getDate() {
@@ -61,7 +64,7 @@ public class Emission {
     }
 
     public String getDateString() {
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-mm-dd");
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         if (this.date != null) {
             return sdf.format(this.date);
         }

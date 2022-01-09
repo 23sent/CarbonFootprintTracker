@@ -29,11 +29,8 @@ public class ViewEmissionsActivity extends AppCompatActivity implements Emission
     }
 
     public void initLineGraph() {
-        ArrayList<Emission> emissions = app.getEmissions();
         ArrayList<LineGraph.PlotPoint> points = new ArrayList<>();
-//        for (int i = 0; i < 7; i++) {
-//            points.add(new LineGraph.PlotPoint(i, i, i + ""));
-//        }
+
         int i = 0;
         for(Emission emission : app.getEmissions()) {
             points.add(new LineGraph.PlotPoint( i, emission.getCarbonFootprint(), i + ""));

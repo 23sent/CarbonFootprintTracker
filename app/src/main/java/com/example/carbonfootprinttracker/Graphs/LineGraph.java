@@ -34,8 +34,6 @@ public class LineGraph extends View {
     private Path plotLinePath;
 
     private Paint gridLinePainter;
-    private int xUnitCount = 7;
-    private int yUnitCount = 100;
     private float xCeil = 1;
     private float yCeil = 1;
     private float xFloor = 0;
@@ -87,7 +85,7 @@ public class LineGraph extends View {
         plotLinePainter = new Paint();
         plotLinePainter = new Paint(Paint.ANTI_ALIAS_FLAG);
         plotLinePainter.setStyle(Paint.Style.STROKE);
-        plotLinePainter.setColor(Color.BLACK);
+        plotLinePainter.setColor(Color.BLUE);
         plotLinePainter.setStrokeWidth(strokeWidth / 2);
 
         plotLinePath = new Path();
@@ -179,9 +177,6 @@ public class LineGraph extends View {
         yCeil = maxY;
         xFloor = minX;
         yFloor = minY;
-
-        xUnitCount = (int) Math.ceil(maxX);
-        yUnitCount = (int) Math.ceil(maxY);
     }
 
     public static class PlotPoint {

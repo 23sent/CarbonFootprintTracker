@@ -22,6 +22,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
 
 public class AddTransportationEmissionActivity extends AppCompatActivity {
@@ -117,8 +118,11 @@ public class AddTransportationEmissionActivity extends AppCompatActivity {
     }
 
     public void setDateTxt(int year, int month, int day) {
+        Toast.makeText(this, "Year: " + year + ", Month: " + month + ", Day: " + day, Toast.LENGTH_SHORT).show();
+
         datePickerTxt.setText(day + "/" + month + "/" + year);
-        emission.setDate(new Date(year, month, day));
+        Date newDate = new GregorianCalendar(year, month, day).getTime();
+        emission.setDate(newDate);
     }
 
     public void onClickSave() {
