@@ -47,8 +47,9 @@ public class CarbonFootprintTracker {
         if (emissionDate == null) {
             return false;
         }
-        final DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-        final LocalDate emissionCreatedDate = LocalDate.parse(emissionDate, dateTimeFormatter);
+        final DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        final LocalDate emissionCreatedDate = LocalDate.parse(emissionDate, dtf);
+
         Date todaysDate = new Date();
         LocalDate localDate = todaysDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
         LocalDate nextDay = localDate.plusDays(1);
@@ -57,12 +58,29 @@ public class CarbonFootprintTracker {
         return emissionCreatedDate.isBefore(nextDay) && emissionCreatedDate.isAfter(previousDay);
     }
 
+    public boolean isEmissionThisMonth(String emissionDate) {
+        if (emissionDate == null) {
+            return false;
+        }
+
+        final DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        final LocalDate emissionCreatedDate = LocalDate.parse(emissionDate, dtf);
+        Date todaysDate = new Date();
+        LocalDate localDate = todaysDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+        LocalDate nextMonth = localDate.plusMonths(1);
+        LocalDate previousMonth = localDate.minusMonths(1);
+
+        return emissionCreatedDate.isBefore(nextMonth) && emissionCreatedDate.isAfter(previousMonth);
+
+    }
+
     public float getDailyEmission() {
         float totalEmission = 0;
         for (Emission emission : emissions) {
             if (emission.getDate() == null) {
                 continue;
             }
+
             if(isEmissionToday(emission.getDateString())) {
                 totalEmission += emission.getCarbonFootprint();
             }
@@ -72,8 +90,14 @@ public class CarbonFootprintTracker {
 
     public float getMonthlyEmission() {
         float total = 0;
-        for(Emission e : emissions) {
-            total = total + e.getQuantity();
+        for(Emission emission : emissions) {
+            if (emission.getDate() == null) {
+                continue;
+            }
+
+            if (isEmissionThisMonth(emission.getDateString())) {
+                total += emission.getCarbonFootprint();
+            }
         }
         return total;
     }

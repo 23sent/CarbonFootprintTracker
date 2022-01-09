@@ -93,6 +93,9 @@ public class EmissionDBHandler extends SQLiteOpenHelper {
 
             EmissionTypes.Type emissionType = EmissionTypes.Type.valueOf(type);
             Date dateCreatedAt = convertStringToDate(createdAt);
+            if (dateCreatedAt == null) {
+                continue;
+            }
             Emission e = new Emission(quantity, total, dateCreatedAt, emissionType);
             emissions.add(e);
         }
