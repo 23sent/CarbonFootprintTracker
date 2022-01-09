@@ -16,6 +16,8 @@ import android.util.Log;
 
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -86,18 +88,14 @@ public class EmissionDBHandler extends SQLiteOpenHelper {
         while (cursor.moveToNext()) {
             float quantity = cursor.getFloat(cursor.getColumnIndexOrThrow(COLUMN_NAME_QUANTITY));
             String createdAt = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_NAME_CREATED_AT));
-            String category = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_NAME_CATEGORY));
             String type = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_NAME_PRODUCT_TYPE));
             float total = cursor.getFloat(cursor.getColumnIndexOrThrow(COLUMN_NAME_TOTAL));
 
             EmissionTypes.Type emissionType = EmissionTypes.Type.valueOf(type);
-
-            Log.d("Get All Emission, Emission:", "quantity: " + quantity + " createdAt: "
-                    + createdAt + " category: " + category + " type: " + type + " total: " + total);
-            Emission e = new Emission(quantity, total, convertStringToDate(createdAt), emissionType);
+            Date dateCreatedAt = convertStringToDate(createdAt);
+            Emission e = new Emission(quantity, total, dateCreatedAt, emissionType);
             emissions.add(e);
         }
-
         return emissions;
     }
 
@@ -119,7 +117,7 @@ public class EmissionDBHandler extends SQLiteOpenHelper {
 
     private Date convertStringToDate(String strDate) {
         Date date;
-        SimpleDateFormat formatter = new SimpleDateFormat("dd mm yyyy", Locale.ENGLISH);
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
         try {
             date = formatter.parse(strDate);
         } catch (Exception e) {

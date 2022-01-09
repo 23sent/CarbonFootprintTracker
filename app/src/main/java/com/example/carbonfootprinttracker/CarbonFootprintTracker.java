@@ -2,7 +2,11 @@ package com.example.carbonfootprinttracker;
 
 import android.util.Log;
 
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class CarbonFootprintTracker {
     private ArrayList<Emission> emissions;
@@ -39,12 +43,30 @@ public class CarbonFootprintTracker {
 
     }
 
+    public boolean isEmissionToday(String emissionDate) {
+        if (emissionDate == null) {
+            return false;
+        }
+        final DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        final LocalDate emissionCreatedDate = LocalDate.parse(emissionDate, dateTimeFormatter);
+        Date todaysDate = new Date();
+        LocalDate localDate = todaysDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+        LocalDate nextDay = localDate.plusDays(1);
+        LocalDate previousDay = localDate.minusDays(1);
+
+        return emissionCreatedDate.isBefore(nextDay) && emissionCreatedDate.isAfter(previousDay);
+    }
+
     public float getDailyEmission() {
         float totalEmission = 0;
         for (Emission emission : emissions) {
-            totalEmission += emission.getCarbonFootprint();
+            if (emission.getDate() == null) {
+                continue;
+            }
+            if(isEmissionToday(emission.getDateString())) {
+                totalEmission += emission.getCarbonFootprint();
+            }
         }
-
         return totalEmission;
     }
 
