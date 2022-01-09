@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -20,6 +21,8 @@ public class EmissionDetails extends AppCompatActivity {
     TextView emissionAmountTxt;
 
     Button deleteBtn;
+
+    ImageView imgView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,5 +51,8 @@ public class EmissionDetails extends AppCompatActivity {
         deleteBtn.setOnClickListener((View view) -> {
             Toast.makeText(this, "Delete", Toast.LENGTH_SHORT).show();
         });
+
+        imgView = findViewById(R.id.imageView);
+        imgView.setImageResource(emission.getType().category.imageResource);
     }
 }

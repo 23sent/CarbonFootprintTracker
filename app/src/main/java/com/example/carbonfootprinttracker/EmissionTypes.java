@@ -22,11 +22,15 @@ public class EmissionTypes {
     }
 
     public enum Category {
-        TRANSPORT("Transportation"), ENERGY("Natural Res."), AGRICULTURE("Agriculture & Food");
+        TRANSPORT("Transportation", R.drawable.ic_baseline_directions_car_75),
+        ENERGY("Natural Res.", R.drawable.ic_baseline_electricity_75),
+        AGRICULTURE("Agriculture & Food", R.drawable.ic_baseline_food_75);
         String name;
+        int imageResource;
 
-        Category(String name) {
+        Category(String name, int img) {
             this.name = name;
+            this.imageResource = img;
         }
     }
 
