@@ -46,14 +46,10 @@ public class MainActivity extends AppCompatActivity {
             Intent intent = new Intent(this, ViewEmissionsActivity.class);
             startActivity(intent);
         });
-
     }
 
     @Override
     protected void onStart() {
-        float dailyEmissions;
-        float monthlyEmissions;
-
         super.onStart();
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
 
@@ -67,12 +63,14 @@ public class MainActivity extends AppCompatActivity {
             Log.e("CFTThread", "Error while joining cftThread: " + e.toString());
         }
 
-        dailyEmissions = cftThread.getDailyEmission();
-        monthlyEmissions = cftThread.getMonthlyEmission();
+        float dailyEmission = cftThread.getDailyEmission();
+        float monthlyEmission = cftThread.getMonthlyEmission();
+        float savedEmission = cftThread.getSavedEmission();
+        float convertedSavedEmission = savedEmission * -1;
 
-        ft.add(R.id.dailyEmissionLayout, PieChartFragment.newInstance("Daily", dailyEmissions+" kgCO2", "", new ArrayList<PieChart.PieSlice>()));
-        ft.add(R.id.monthlyEmissionLayout, PieChartFragment.newInstance("Monthly", monthlyEmissions+" kgCO2", "", new ArrayList<PieChart.PieSlice>()));
-        ft.add(R.id.emissionSavedLayout, PieChartFragment.newInstance("Saved", "15 kgCo2", "", new ArrayList<PieChart.PieSlice>()));
+        ft.add(R.id.dailyEmissionLayout, PieChartFragment.newInstance("Daily", dailyEmission+" kgCO2", "", new ArrayList<PieChart.PieSlice>()));
+        ft.add(R.id.monthlyEmissionLayout, PieChartFragment.newInstance("Monthly", monthlyEmission+" kgCO2", "", new ArrayList<PieChart.PieSlice>()));
+        ft.add(R.id.emissionSavedLayout, PieChartFragment.newInstance("Saved", convertedSavedEmission+" kgCO2", "", new ArrayList<PieChart.PieSlice>()));
         ft.commit();
     }
 }
