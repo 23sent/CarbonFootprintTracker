@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -23,6 +24,7 @@ public class EmissionDetails extends AppCompatActivity {
     Button deleteBtn;
 
     CarbonFootprintTracker app;
+    ImageView imgView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,6 +58,9 @@ public class EmissionDetails extends AppCompatActivity {
             Intent intent = new Intent(this, ViewEmissionsActivity.class);
             startActivity(intent);
         });
+
+        imgView = findViewById(R.id.imageView);
+        imgView.setImageResource(emission.getType().category.imageResource);
     }
 
     public void onClickDelete() {

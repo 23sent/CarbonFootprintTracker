@@ -5,6 +5,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.carbonfootprinttracker.databinding.EmissionFragmentItemBinding;
@@ -29,15 +30,18 @@ public class ViewEmissionsRecyclerViewAdapter extends RecyclerView.Adapter<ViewE
 
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
-        holder.mItem = mValues.get(position);
-        holder.date.setText(mValues.get(position).getDateString("dd MMM. yyyy"));
-        holder.type.setText(mValues.get(position).getTypeString());
-        holder.amount.setText(mValues.get(position).getCarbonFootprintString());
+        Emission emission = mValues.get(position);
+        holder.mItem = emission;
+        holder.date.setText(emission.getDateString("dd MMM. yyyy"));
+        holder.type.setText(emission.getTypeString());
+        holder.amount.setText(emission.getCarbonFootprintString());
         holder.view.setOnClickListener((View view) -> {
             if (listener != null) {
                 listener.onEmissionSelected(holder.mItem);
             }
         });
+
+       holder.imgView.setImageResource(emission.getType().category.imageResource);
     }
 
     @Override
@@ -50,6 +54,7 @@ public class ViewEmissionsRecyclerViewAdapter extends RecyclerView.Adapter<ViewE
         public final TextView date;
         public final TextView type;
         public final TextView amount;
+        public final ImageView imgView;
         public Emission mItem;
 
         public ViewHolder(EmissionFragmentItemBinding binding) {
@@ -58,6 +63,7 @@ public class ViewEmissionsRecyclerViewAdapter extends RecyclerView.Adapter<ViewE
             type = binding.type;
             amount = binding.amount;
             view = binding.getRoot();
+            imgView  = binding.imageView;
         }
 
         @Override

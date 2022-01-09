@@ -23,7 +23,7 @@ public class MainActivity extends AppCompatActivity {
     Button addEmissionBtn;
     Button viewEmissionsBtn;
     CarbonFootprintTracker app;
-    
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
