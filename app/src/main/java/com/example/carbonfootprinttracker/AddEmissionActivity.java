@@ -5,10 +5,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 public class AddEmissionActivity extends AppCompatActivity {
     Button addTransportationBtn;
@@ -20,6 +23,17 @@ public class AddEmissionActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_emission);
+
+        getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
+        getSupportActionBar().setCustomView(R.layout.action_bar);
+        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        View actionBar = getSupportActionBar().getCustomView();
+        TextView pageHead = actionBar.findViewById(R.id.pageNameTxt);
+        pageHead.setText("Add Emission");
+        ImageView backBtn = actionBar.findViewById(R.id.backBtn);
+        backBtn.setOnClickListener((View view) -> {
+            onBackPressed();
+        });
 
         addTransportationBtn = (Button) findViewById(R.id.addTransportationBtn);
         addTransportationBtn.setOnClickListener((View v) -> {

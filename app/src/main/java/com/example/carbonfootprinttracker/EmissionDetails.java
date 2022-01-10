@@ -1,8 +1,11 @@
 package com.example.carbonfootprinttracker;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -30,6 +33,17 @@ public class EmissionDetails extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_emission_details);
+
+        getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
+        getSupportActionBar().setCustomView(R.layout.action_bar);
+        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        View actionBar = getSupportActionBar().getCustomView();
+        TextView pageHead = actionBar.findViewById(R.id.pageNameTxt);
+        pageHead.setText("Emission Details");
+        ImageView backBtn = actionBar.findViewById(R.id.backBtn);
+        backBtn.setOnClickListener((View view) -> {
+            onBackPressed();
+        });
 
         emission = (Emission) getIntent().getExtras().getSerializable("emission");
 

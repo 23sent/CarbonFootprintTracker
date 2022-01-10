@@ -1,5 +1,6 @@
 package com.example.carbonfootprinttracker;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentTransaction;
 
@@ -9,9 +10,11 @@ import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.carbonfootprinttracker.Graphs.PieChart;
 import com.example.carbonfootprinttracker.Graphs.PieChartFragment;
@@ -44,6 +47,19 @@ public class MainActivity extends AppCompatActivity {
             Intent intent = new Intent(this, ViewEmissionsActivity.class);
             startActivity(intent);
         });
+
+        getSupportActionBar().hide();
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                Toast.makeText(this, "Back", Toast.LENGTH_SHORT).show();
+                onBackPressed();
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     @Override
@@ -101,4 +117,6 @@ public class MainActivity extends AppCompatActivity {
         ft.add(R.id.emissionSavedLayout, PieChartFragment.newInstance("Saved", convertedSavedEmission + " kgCO2", "", savedSlices));
         ft.commit();
     }
+
+
 }
