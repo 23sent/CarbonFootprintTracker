@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
@@ -20,6 +21,7 @@ import com.example.carbonfootprinttracker.Graphs.PieChart;
 import com.example.carbonfootprinttracker.Graphs.PieChartFragment;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class MainActivity extends AppCompatActivity {
     static final String TAG = "MainActivity";
@@ -48,24 +50,13 @@ public class MainActivity extends AppCompatActivity {
             startActivity(intent);
         });
 
-        getSupportActionBar().hide();
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        switch (item.getItemId()) {
-            case android.R.id.home:
-                Toast.makeText(this, "Back", Toast.LENGTH_SHORT).show();
-                onBackPressed();
-                return true;
-        }
-        return super.onOptionsItemSelected(item);
+        Objects.requireNonNull(getSupportActionBar()).hide();
+        updateFragments(0,0,0);
     }
 
     @Override
     protected void onStart() {
         super.onStart();
-        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
 
         CFTThread cftThread = new CFTThread();
         cftThread.setParams(app);
@@ -80,6 +71,12 @@ public class MainActivity extends AppCompatActivity {
         float dailyEmission = cftThread.getDailyEmission();
         float monthlyEmission = cftThread.getMonthlyEmission();
         float savedEmission = cftThread.getSavedEmission();
+        updateFragments(dailyEmission, monthlyEmission, savedEmission);
+    }
+
+    public void updateFragments(float dailyEmission, float monthlyEmission, float savedEmission) {
+        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+
         float convertedSavedEmission = savedEmission;
         if (savedEmission != 0) {
             convertedSavedEmission = savedEmission * -1;
@@ -102,7 +99,7 @@ public class MainActivity extends AppCompatActivity {
 
         dailySlices.add(new PieChart.PieSlice(dailySliceColor, dailyRemain360));
 
-        ft.add(R.id.dailyEmissionLayout, PieChartFragment.newInstance("Daily", dailyEmission + " kgCO2", String.format("%.1f", dailyRemain100)+"%", dailySlices));
+        ft.replace(R.id.dailyEmissionLayout, PieChartFragment.newInstance("Daily", dailyEmission + " kgCO2", String.format("%.1f", dailyRemain100)+"%", dailySlices), "dailyEmission");
 
         float monthlyRemain360 = 360 * monthlyEmission / idealEmissionPerMonth;
         float monthlyRemain100 = 100 * monthlyEmission / idealEmissionPerMonth;
@@ -112,11 +109,9 @@ public class MainActivity extends AppCompatActivity {
         };
 
         monthlySlices.add(new PieChart.PieSlice(monthlySliceColor, monthlyRemain360));
-        ft.add(R.id.monthlyEmissionLayout, PieChartFragment.newInstance("Monthly", monthlyEmission + " kgCO2", String.format("%.1f", monthlyRemain100)+"%", monthlySlices));
+        ft.replace(R.id.monthlyEmissionLayout, PieChartFragment.newInstance("Monthly", monthlyEmission + " kgCO2", String.format("%.1f", monthlyRemain100)+"%", monthlySlices), "monthlyEmission");
 
-        ft.add(R.id.emissionSavedLayout, PieChartFragment.newInstance("Saved", convertedSavedEmission + " kgCO2", "", savedSlices));
+        ft.replace(R.id.emissionSavedLayout, PieChartFragment.newInstance("Saved", convertedSavedEmission + " kgCO2", "", savedSlices), "savedEmission");
         ft.commit();
     }
-
-
 }
