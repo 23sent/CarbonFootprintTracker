@@ -12,6 +12,7 @@ import com.example.carbonfootprinttracker.Graphs.LineGraph;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.List;
 
 public class ViewEmissionsActivity extends AppCompatActivity implements EmissionsFragment.OnEmissionSelectListener {
     LineGraph graph;
@@ -32,10 +33,12 @@ public class ViewEmissionsActivity extends AppCompatActivity implements Emission
     public void initLineGraph() {
         ArrayList<LineGraph.PlotPoint> points = new ArrayList<>();
 
-        int i = 0;
-        for(Emission emission : app.getEmissions()) {
-            points.add(new LineGraph.PlotPoint( i, emission.getCarbonFootprint(), i + ""));
-            i++;
+        List<Emission> emissions = app.getEmissions();
+
+        // Show last 9 emission in graph.
+        for(int i = 0; i <= 9 && i < emissions.size(); i++) {
+            Emission emission = emissions.get(emissions.size() -i -1);
+            points.add(new LineGraph.PlotPoint( i, emission.getCarbonFootprint(), ""));
         }
         graph.setPlotPoints(points);
     }

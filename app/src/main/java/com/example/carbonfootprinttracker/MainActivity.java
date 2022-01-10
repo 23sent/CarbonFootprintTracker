@@ -69,10 +69,36 @@ public class MainActivity extends AppCompatActivity {
             convertedSavedEmission = savedEmission * -1;
         }
 
+        float idealEmissionPerYear = 2000;
+        float idealEmissionPerMonth = 166.6f;
+        float idealEmissionPerDay = 5.5f;
 
-        ft.add(R.id.dailyEmissionLayout, PieChartFragment.newInstance("Daily", dailyEmission+" kgCO2", "", new ArrayList<PieChart.PieSlice>()));
-        ft.add(R.id.monthlyEmissionLayout, PieChartFragment.newInstance("Monthly", monthlyEmission+" kgCO2", "", new ArrayList<PieChart.PieSlice>()));
-        ft.add(R.id.emissionSavedLayout, PieChartFragment.newInstance("Saved", convertedSavedEmission+" kgCO2", "", new ArrayList<PieChart.PieSlice>()));
+        ArrayList<PieChart.PieSlice> dailySlices = new ArrayList<>();
+        ArrayList<PieChart.PieSlice> monthlySlices = new ArrayList<>();
+        ArrayList<PieChart.PieSlice> savedSlices = new ArrayList<>();
+
+        float dailyRemain360 = 360 * dailyEmission / idealEmissionPerDay;
+        float dailyRemain100 = 100 * dailyEmission / idealEmissionPerDay;
+        int dailySliceColor = Color.argb(150, 0, 250, 0);
+        if (dailyRemain100 >= 100) {
+            dailySliceColor = Color.argb(150, 250, 0, 0);
+        }
+
+        dailySlices.add(new PieChart.PieSlice(dailySliceColor, dailyRemain360));
+
+        ft.add(R.id.dailyEmissionLayout, PieChartFragment.newInstance("Daily", dailyEmission + " kgCO2", String.format("%.1f", dailyRemain100)+"%", dailySlices));
+
+        float monthlyRemain360 = 360 * monthlyEmission / idealEmissionPerMonth;
+        float monthlyRemain100 = 100 * monthlyEmission / idealEmissionPerMonth;
+        int monthlySliceColor = Color.argb(150, 0, 250, 0);
+        if (monthlyRemain100 >= 100) {
+            monthlySliceColor = Color.argb(150, 250, 0, 0);
+        };
+
+        monthlySlices.add(new PieChart.PieSlice(monthlySliceColor, monthlyRemain360));
+        ft.add(R.id.monthlyEmissionLayout, PieChartFragment.newInstance("Monthly", monthlyEmission + " kgCO2", String.format("%.1f", monthlyRemain100)+"%", monthlySlices));
+
+        ft.add(R.id.emissionSavedLayout, PieChartFragment.newInstance("Saved", convertedSavedEmission + " kgCO2", "", savedSlices));
         ft.commit();
     }
 }

@@ -90,7 +90,7 @@ public class AddTransportationEmissionActivity extends AppCompatActivity {
                 } else {
                     emission.setQuantity(0);
                 }
-                carbonEmissionTxt.setText(emission.getCarbonFootprint() + " kg CO2");
+                carbonEmissionTxt.setText(emission.getCarbonFootprintString());
             }
 
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -149,7 +149,7 @@ public class AddTransportationEmissionActivity extends AppCompatActivity {
     public void setType(EmissionTypes.Type type) {
         Log.d("Spinner selected", "onItemSelected: " + type);
         emission.setType(type);
-        carbonEmissionTxt.setText(emission.getCarbonFootprint() + " kg CO2");
+        carbonEmissionTxt.setText(emission.getCarbonFootprintString());
 
         TextView unitHeader = findViewById(R.id.unitHeader);
         unitHeader.setText(type.unit.tag);
@@ -161,7 +161,7 @@ public class AddTransportationEmissionActivity extends AppCompatActivity {
     public void setDateTxt(int year, int month, int day) {
         Date newDate = new GregorianCalendar(year, month, day).getTime();
         emission.setDate(newDate);
-        datePickerTxt.setText(emission.getDateString());
+        datePickerTxt.setText(emission.getDateString("EEEE, dd MMMM yyyy"));
     }
 
     public void onClickSave() {
