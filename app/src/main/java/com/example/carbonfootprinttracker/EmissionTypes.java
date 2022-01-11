@@ -3,14 +3,20 @@ package com.example.carbonfootprinttracker;
 import java.util.ArrayList;
 import java.util.List;
 
-
+/**
+ * Emission Types, Categories and Units
+ * https://www.winnipeg.ca/finance/findata/matmgt/documents/2012/682-2012/682-2012_Appendix_H-WSTP_South_End_Plant_Process_Selection_Report/Appendix%207.pdf
+ *
+ */
 public class EmissionTypes {
 
     public enum Unit {
-        KM("km", "Distance"),
+        KM("km", "Distance (km)"),
         KG("kg", "Consumption (kg)"),
         HOURS("hours", "Duration (h)"),
-        KWH("kWh", "Consumption (kWh)");
+        KWH("kWh", "Consumption (kWh)"),
+        M3("m3", "Consumption (cubic meter)"),
+        KGCO2EQ("kgCo2-Eq", "Kg CO2-Equivalent");
 
         String name;
         String tag;
@@ -37,13 +43,15 @@ public class EmissionTypes {
     public enum Type {
         BUS(Category.TRANSPORT, "Bus", 0.000103f * 60, Unit.HOURS),
         PLANE(Category.TRANSPORT, "Plane", 0.00034f * 60, Unit.HOURS),
-        CAR(Category.TRANSPORT, "Car", 0.000257f * 60, Unit.HOURS),
+        CAR(Category.TRANSPORT, "Car", 0.19f, Unit.KM),
 
         RED_MEAT(Category.AGRICULTURE, "Red Meat", (39.2f + 27.0f) / 2f, Unit.KG),
         WHITE_MEAT(Category.AGRICULTURE, "White Meat", 6.9f, Unit.KG),
         FISH(Category.AGRICULTURE, "Fish", 6.1f, Unit.KG),
 
-        ELECTRICITY(Category.ENERGY, "Electricity", 0.394f, Unit.KWH);
+        ELECTRICITY(Category.ENERGY, "Electricity", 0.394f, Unit.KWH),
+        WATER(Category.ENERGY, "Water", 0.32f, Unit.M3),
+        NATURAL_GAS(Category.ENERGY, "Natural Gas", 0.21f, Unit.KWH);
 
         Category category;
         String name;

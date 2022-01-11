@@ -51,7 +51,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
         Objects.requireNonNull(getSupportActionBar()).hide();
-        updateFragments(0,0,0);
+        updateFragments(0, 0, 0);
     }
 
     @Override
@@ -99,19 +99,32 @@ public class MainActivity extends AppCompatActivity {
 
         dailySlices.add(new PieChart.PieSlice(dailySliceColor, dailyRemain360));
 
-        ft.replace(R.id.dailyEmissionLayout, PieChartFragment.newInstance("Daily", dailyEmission + " kgCO2", String.format("%.1f", dailyRemain100)+"%", dailySlices), "dailyEmission");
+        ft.replace(R.id.dailyEmissionLayout,
+                PieChartFragment.newInstance("Daily",
+                        String.format("%.2f ", dailyEmission) + EmissionTypes.Unit.KGCO2EQ.name,
+                        String.format("%.1f", dailyRemain100) + "%", dailySlices),
+                "dailyEmission");
 
         float monthlyRemain360 = 360 * monthlyEmission / idealEmissionPerMonth;
         float monthlyRemain100 = 100 * monthlyEmission / idealEmissionPerMonth;
         int monthlySliceColor = Color.argb(150, 0, 250, 0);
         if (monthlyRemain100 >= 100) {
             monthlySliceColor = Color.argb(150, 250, 0, 0);
-        };
+        }
+        ;
 
         monthlySlices.add(new PieChart.PieSlice(monthlySliceColor, monthlyRemain360));
-        ft.replace(R.id.monthlyEmissionLayout, PieChartFragment.newInstance("Monthly", monthlyEmission + " kgCO2", String.format("%.1f", monthlyRemain100)+"%", monthlySlices), "monthlyEmission");
+        ft.replace(R.id.monthlyEmissionLayout,
+                PieChartFragment.newInstance("Monthly",
+                        String.format("%.2f ", monthlyEmission) + EmissionTypes.Unit.KGCO2EQ.name,
+                        String.format("%.1f", monthlyRemain100) + "%", monthlySlices),
+                "monthlyEmission");
 
-        ft.replace(R.id.emissionSavedLayout, PieChartFragment.newInstance("Saved", convertedSavedEmission + " kgCO2", "", savedSlices), "savedEmission");
+        ft.replace(R.id.emissionSavedLayout,
+                PieChartFragment.newInstance("Saved",
+                        String.format("%.2f ", convertedSavedEmission) + EmissionTypes.Unit.KGCO2EQ.name,
+                        "", savedSlices),
+                "savedEmission");
         ft.commit();
     }
 }

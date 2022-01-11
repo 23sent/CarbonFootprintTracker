@@ -84,7 +84,7 @@ public class Emission implements Serializable {
     }
 
     public String getCarbonFootprintString() {
-        return this.carbonFootprint+" kgCO2eq";
+        return String.format("%.2f ", this.carbonFootprint) + EmissionTypes.Unit.KGCO2EQ.name;
     }
 
     public String getTypeString() {
