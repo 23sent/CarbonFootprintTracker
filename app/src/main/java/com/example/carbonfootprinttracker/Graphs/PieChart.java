@@ -13,6 +13,7 @@ import android.view.View;
 
 import com.example.carbonfootprinttracker.R;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,7 +23,7 @@ import java.util.List;
  *
  * Utku Sağocak
  */
-public class PieChart extends View {
+public class PieChart extends View implements Serializable  {
     RectF rectF;
     Paint backCirclePaint;
 
@@ -156,12 +157,22 @@ public class PieChart extends View {
         circles.add(pie);
     }
 
+    public void setPieSlices(ArrayList<PieSlice> slices) {
+        for(PieSlice s : slices) {
+            s.getPainter().setStrokeWidth(circleWidth);
+        }
+        this.circles = slices;
+    }
+
     public PieSlice getPieSlice(int index) {
         return circles.get(index);
     }
 
-    public static class PieSlice {
-        Paint painter;
+    /**
+     * PieSlice
+     */
+    public static class PieSlice implements Serializable {
+        CustomPaint painter;
         float sweepAngle = 0;
         int color = Color.GRAY;
 
@@ -170,6 +181,11 @@ public class PieChart extends View {
             initPainter();
         }
 
+        /**
+         *
+         * @param color Color
+         * @param sweepAngle Angle
+         */
         public PieSlice(int color, float sweepAngle) {
             this.color = color;
             this.sweepAngle = sweepAngle;
@@ -177,7 +193,7 @@ public class PieChart extends View {
         }
 
         private void initPainter() {
-            this.painter = new Paint(Paint.ANTI_ALIAS_FLAG);
+            this.painter = new CustomPaint(CustomPaint.ANTI_ALIAS_FLAG);
             this.painter.setStyle(Paint.Style.STROKE);
             this.painter.setColor(this.color);
         }
@@ -201,6 +217,18 @@ public class PieChart extends View {
 
         public void setSweepAngle(float sweepAngle) {
             this.sweepAngle = sweepAngle;
+        }
+
+        private static class CustomPaint extends Paint implements Serializable {
+            // Just to be serializable Paint class.
+            // Otherwise it cause a not serializable error.
+            // Utku Sağocak
+            public CustomPaint() {
+                super();
+            }
+            public CustomPaint(int flags) {
+                super(flags);
+            }
         }
     }
 }

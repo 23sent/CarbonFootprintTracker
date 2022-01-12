@@ -1,10 +1,13 @@
 package com.example.carbonfootprinttracker;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.DialogFragment;
 
 import android.app.DatePickerDialog;
 import android.app.Dialog;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.icu.util.Calendar;
 import android.os.Bundle;
 import android.text.Editable;
@@ -16,6 +19,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.SpinnerAdapter;
 import android.widget.TextView;
@@ -50,6 +54,17 @@ public class AddTransportationEmissionActivity extends AppCompatActivity {
         setContentView(R.layout.activity_add_transportation_emission);
         category = (EmissionTypes.Category) getIntent().getExtras().getSerializable("category");
         emissionTypes = EmissionTypes.getTypes(category);
+
+        getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
+        getSupportActionBar().setCustomView(R.layout.action_bar);
+        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        View actionBar = getSupportActionBar().getCustomView();
+        TextView pageHead = actionBar.findViewById(R.id.pageNameTxt);
+        pageHead.setText("Add Emission");
+        ImageView backBtn = actionBar.findViewById(R.id.backBtn);
+        backBtn.setOnClickListener((View view) -> {
+            onBackPressed();
+        });
 
         initTypeText();
 
@@ -90,7 +105,7 @@ public class AddTransportationEmissionActivity extends AppCompatActivity {
                 } else {
                     emission.setQuantity(0);
                 }
-                carbonEmissionTxt.setText(emission.getCarbonFootprint() + " kg CO2");
+                carbonEmissionTxt.setText(emission.getCarbonFootprintString());
             }
 
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -149,7 +164,7 @@ public class AddTransportationEmissionActivity extends AppCompatActivity {
     public void setType(EmissionTypes.Type type) {
         Log.d("Spinner selected", "onItemSelected: " + type);
         emission.setType(type);
-        carbonEmissionTxt.setText(emission.getCarbonFootprint() + " kg CO2");
+        carbonEmissionTxt.setText(emission.getCarbonFootprintString());
 
         TextView unitHeader = findViewById(R.id.unitHeader);
         unitHeader.setText(type.unit.tag);
@@ -161,7 +176,7 @@ public class AddTransportationEmissionActivity extends AppCompatActivity {
     public void setDateTxt(int year, int month, int day) {
         Date newDate = new GregorianCalendar(year, month, day).getTime();
         emission.setDate(newDate);
-        datePickerTxt.setText(emission.getDateString());
+        datePickerTxt.setText(emission.getDateString("EEEE, dd MMMM yyyy"));
     }
 
     public void onClickSave() {

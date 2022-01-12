@@ -13,6 +13,7 @@ import android.widget.TextView;
 
 import com.example.carbonfootprinttracker.R;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
@@ -20,7 +21,7 @@ import java.util.ArrayList;
  * Use the {@link PieChartFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class PieChartFragment extends Fragment {
+public class PieChartFragment extends Fragment implements Serializable {
 
     private static final String ARG_HEADER = "ARG_HEADER";
     private static final String ARG_LABEL = "ARG_LABEL";
@@ -86,5 +87,10 @@ public class PieChartFragment extends Fragment {
         header.setText(mHeader);
         label.setText(mLabel);
         chart.setText(mChartLabel);
+
+//        for(PieChart.PieSlice slice : mPieSlices) {
+//            chart.addPieSlice(slice);
+//        }
+        chart.setPieSlices(mPieSlices);
     }
 }

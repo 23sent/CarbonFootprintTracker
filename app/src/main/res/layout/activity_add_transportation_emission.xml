@@ -123,9 +123,9 @@
             android:id="@+id/textView2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Total Emission"
+            android:text="Carbon Emission"
             style="@style/TextAppearance.AppCompat.Display1"
-
+            android:textSize="30sp"
             />
 
         <TextView
@@ -133,7 +133,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="0"
-            android:textSize="30sp" />
+            android:textSize="28sp" />
     </LinearLayout>
 
     <LinearLayout

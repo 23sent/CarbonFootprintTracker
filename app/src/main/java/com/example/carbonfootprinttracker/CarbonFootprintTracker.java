@@ -26,9 +26,6 @@ public class CarbonFootprintTracker {
         return instance;
     }
 
-    public void setEmissions(ArrayList<Emission> emissions) {
-        this.emissions = emissions;
-    }
 
     public void addEmissions(Emission e) {
         float quantity = e.getQuantity();
@@ -39,9 +36,6 @@ public class CarbonFootprintTracker {
         this.emissions.add(e);
     }
 
-    public void updateEmissions(Emission e) {
-
-    }
 
     public static boolean isEmissionToday(String emissionDate) {
         if (emissionDate == null) {
