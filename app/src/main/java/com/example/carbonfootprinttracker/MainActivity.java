@@ -1,21 +1,14 @@
 package com.example.carbonfootprinttracker;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentTransaction;
 
-import android.annotation.SuppressLint;
-import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.carbonfootprinttracker.Graphs.PieChart;
 import com.example.carbonfootprinttracker.Graphs.PieChartFragment;
@@ -53,6 +46,7 @@ public class MainActivity extends AppCompatActivity {
         Objects.requireNonNull(getSupportActionBar()).hide();
         updateFragments(0, 0, 0);
     }
+
 
     @Override
     protected void onStart() {

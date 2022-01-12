@@ -3,7 +3,6 @@ package com.example.carbonfootprinttracker;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
@@ -13,7 +12,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.text.SimpleDateFormat;
 
 public class EmissionDetails extends AppCompatActivity {
     Emission emission;
@@ -69,8 +67,7 @@ public class EmissionDetails extends AppCompatActivity {
         deleteBtn.setOnClickListener((View view) -> {
             this.onClickDelete();
             Toast.makeText(this, "Emission is Deleted", Toast.LENGTH_SHORT).show();
-            Intent intent = new Intent(this, ViewEmissionsActivity.class);
-            startActivity(intent);
+            finish();
         });
 
         imgView = findViewById(R.id.imageView);
