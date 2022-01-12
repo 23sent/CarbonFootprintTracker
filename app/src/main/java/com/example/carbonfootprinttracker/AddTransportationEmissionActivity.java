@@ -153,6 +153,9 @@ public class AddTransportationEmissionActivity extends AppCompatActivity {
         } else if (category == EmissionTypes.Category.AGRICULTURE) {
             typeText = "Agriculture or Food";
             headerText = "Agriculture & Food";
+        } else if (category == EmissionTypes.Category.CUSTOM) {
+            typeText = "Custom Emission";
+            headerText = "Custom Emission";
         }
         typeText += " Type";
 

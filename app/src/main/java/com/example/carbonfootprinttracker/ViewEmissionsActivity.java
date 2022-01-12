@@ -29,6 +29,7 @@ public class ViewEmissionsActivity extends AppCompatActivity implements Emission
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_emissions);
 
+        // Set custom action bar.
         getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
         getSupportActionBar().setCustomView(R.layout.action_bar);
         getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
@@ -44,7 +45,17 @@ public class ViewEmissionsActivity extends AppCompatActivity implements Emission
         initLineGraph();
 
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-        ft.add(R.id.emissions_container, EmissionsFragment.newInstance(app.getEmissions()));
+        ft.add(R.id.emissions_container, EmissionsFragment.newInstance(app.getEmissions()), "emissions");
+        ft.commit();
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        initLineGraph();
+
+        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+        ft.replace(R.id.emissions_container, EmissionsFragment.newInstance(app.getEmissions()),"emissions");
         ft.commit();
     }
 

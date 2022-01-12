@@ -77,11 +77,6 @@ public class MainActivity extends AppCompatActivity {
     public void updateFragments(float dailyEmission, float monthlyEmission, float savedEmission) {
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
 
-        float convertedSavedEmission = savedEmission;
-        if (savedEmission != 0) {
-            convertedSavedEmission = savedEmission * -1;
-        }
-
         float idealEmissionPerYear = 2000;
         float idealEmissionPerMonth = 166.6f;
         float idealEmissionPerDay = 5.5f;
@@ -120,10 +115,18 @@ public class MainActivity extends AppCompatActivity {
                         String.format("%.1f", monthlyRemain100) + "%", monthlySlices),
                 "monthlyEmission");
 
+        float savedEmission360 = 360 * savedEmission / 100;
+        int savedSliceColor = Color.argb(150, 0, 250, 0);
+        if (savedEmission < 0) {
+            savedSliceColor = Color.argb(150, 250, 0, 0);
+        }
+        savedSlices.add(new PieChart.PieSlice(savedSliceColor, savedEmission360));
+
         ft.replace(R.id.emissionSavedLayout,
                 PieChartFragment.newInstance("Saved",
-                        String.format("%.2f ", convertedSavedEmission) + EmissionTypes.Unit.KGCO2EQ.name,
-                        "", savedSlices),
+                        String.format("%.2f", savedEmission) + "%",
+                        String.format("%.2f", savedEmission) + "%",
+                        savedSlices),
                 "savedEmission");
         ft.commit();
     }

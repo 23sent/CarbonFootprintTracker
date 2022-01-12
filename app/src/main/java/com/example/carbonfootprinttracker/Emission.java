@@ -66,6 +66,10 @@ public class Emission implements Serializable {
         }
     }
 
+    public void setId(long id) {
+        this.id = id;
+    }
+
     public long getId() {
         return id;
     }
@@ -76,8 +80,6 @@ public class Emission implements Serializable {
 
     public String getDateString(String format) {
         SimpleDateFormat sdf = new SimpleDateFormat(format);
-//        final DateTimeFormatter dtf = DateTimeFormatter.ofPattern(format);
-//        final LocalDate emissionCreatedDate = LocalDate.parse(this.date, dtf);
         if (this.date != null) {
             return sdf.format(this.date);
         }
@@ -90,7 +92,7 @@ public class Emission implements Serializable {
 
     public String getTypeString() {
         if (this.type != null) {
-            return type.category.name +" - "+type.name;
+            return type.category.name + " - " + type.name;
         }
         return "-";
     }

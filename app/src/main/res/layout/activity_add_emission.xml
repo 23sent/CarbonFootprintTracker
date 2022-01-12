@@ -14,7 +14,8 @@
         android:layout_height="wrap_content"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:paddingVertical="30dp">
 
         <TextView
             android:id="@+id/selectAConsumptionTxt"
@@ -22,7 +23,8 @@
             android:layout_height="wrap_content"
             android:text="Select a consumption type."
             android:textAlignment="center"
-            android:textSize="20sp" />
+            android:textSize="20sp"
+            android:paddingVertical="30dp"/>
 
 
         <LinearLayout
@@ -32,24 +34,28 @@
             android:orientation="vertical"
             android:padding="10dp">
 
-            <Button
-                android:id="@+id/addTransportationBtn"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Transportation" />
+<!--            <Button-->
+<!--                android:id="@+id/addTransportationBtn"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:text="Transportation" />-->
 
-            <Button
-                android:id="@+id/addEnergyBtn"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Energy &amp; Natural Resources" />
+<!--            <Button-->
+<!--                android:id="@+id/addEnergyBtn"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:text="Energy &amp; Natural Resources" />-->
 
-            <Button
-                android:id="@+id/addAgricultureBtn"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Agriculture &amp; Single Use Products" />
+<!--            <Button-->
+<!--                android:id="@+id/addAgricultureBtn"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:text="Agriculture &amp; Single Use Products" />-->
 
+            <ListView
+                android:id="@+id/categoryListView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
         </LinearLayout>
     </LinearLayout>
 

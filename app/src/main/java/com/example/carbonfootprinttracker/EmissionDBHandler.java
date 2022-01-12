@@ -114,7 +114,7 @@ public class EmissionDBHandler extends SQLiteOpenHelper {
         values.put(COLUMN_NAME_TOTAL, e.getCarbonFootprint());
 
         long newRowId = db.insert(TABLE_NAME, null, values);
-
+        e.setId(newRowId);
         Log.d("DB Insert", "New Emission Inserted to the DB with ID: " + newRowId);
         return e;
     }

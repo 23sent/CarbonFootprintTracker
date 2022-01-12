@@ -29,13 +29,22 @@ public class EmissionTypes {
 
     public enum Category {
         TRANSPORT("Transportation", R.drawable.ic_baseline_directions_car_75),
-        ENERGY("Natural Res.", R.drawable.ic_baseline_electricity_75),
-        AGRICULTURE("Agriculture & Food", R.drawable.ic_baseline_food_75);
+        ENERGY("Natural Res.", "Energy & Natural Resources", R.drawable.ic_baseline_electricity_75),
+        AGRICULTURE("Agriculture & Food", R.drawable.ic_baseline_food_75),
+        CUSTOM("Custom Emission", R.drawable.ic_baseline_build_circle_70);
         String name;
+        String fullName;
         int imageResource;
+
+        Category(String name, String fullName, int img) {
+            this.name = name;
+            this.fullName = fullName;
+            this.imageResource = img;
+        }
 
         Category(String name, int img) {
             this.name = name;
+            this.fullName = name;
             this.imageResource = img;
         }
     }
@@ -51,7 +60,8 @@ public class EmissionTypes {
 
         ELECTRICITY(Category.ENERGY, "Electricity", 0.394f, Unit.KWH),
         WATER(Category.ENERGY, "Water", 0.32f, Unit.M3),
-        NATURAL_GAS(Category.ENERGY, "Natural Gas", 0.21f, Unit.KWH);
+        NATURAL_GAS(Category.ENERGY, "Natural Gas", 0.21f, Unit.KWH),
+        CUSTOM_EMISSION(Category.CUSTOM, "Emission", 1.0f, Unit.KGCO2EQ);
 
         Category category;
         String name;
