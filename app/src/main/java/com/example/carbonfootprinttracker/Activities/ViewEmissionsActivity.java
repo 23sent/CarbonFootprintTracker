@@ -1,4 +1,4 @@
-package com.example.carbonfootprinttracker;
+package com.example.carbonfootprinttracker.Activities;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
@@ -11,13 +11,14 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.example.carbonfootprinttracker.Graphs.LineGraph;
+import com.example.carbonfootprinttracker.Fragments.EmissionsFragment;
+import com.example.carbonfootprinttracker.CustomGraphs.LineGraph;
+import com.example.carbonfootprinttracker.Models.CarbonFootprintTracker;
+import com.example.carbonfootprinttracker.Models.Emission;
+import com.example.carbonfootprinttracker.R;
 
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
 import java.util.List;
 
 public class ViewEmissionsActivity extends AppCompatActivity implements EmissionsFragment.OnEmissionSelectListener {
@@ -76,7 +77,7 @@ public class ViewEmissionsActivity extends AppCompatActivity implements Emission
     public void onEmissionSelected(Emission emission) {
         Bundle bundle = new Bundle();
         bundle.putSerializable("emission", emission);
-        Intent intent = new Intent(this, EmissionDetails.class);
+        Intent intent = new Intent(this, EmissionDetailsActivity.class);
         intent.putExtras(bundle);
         startActivity(intent);
     }

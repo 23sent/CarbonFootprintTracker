@@ -1,4 +1,4 @@
-package com.example.carbonfootprinttracker;
+package com.example.carbonfootprinttracker.Activities;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
@@ -12,8 +12,15 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.carbonfootprinttracker.EmissionTypes;
+import com.example.carbonfootprinttracker.Models.CarbonFootprintTracker;
+import com.example.carbonfootprinttracker.Models.Emission;
+import com.example.carbonfootprinttracker.R;
 
-public class EmissionDetails extends AppCompatActivity {
+/**
+ * Utku Sağocak, Hüseyin Emre Arı
+ */
+public class EmissionDetailsActivity extends AppCompatActivity {
     Emission emission;
     TextView categoryTxt;
     TextView typeTxt;

@@ -11,19 +11,19 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.CarbonFootprintTracker">
         <activity
-            android:name=".EmissionDetails"
+            android:name=".Activities.EmissionDetailsActivity"
             android:exported="true" />
         <activity
-            android:name=".ViewEmissionsActivity"
+            android:name=".Activities.ViewEmissionsActivity"
             android:exported="true" />
         <activity
-            android:name=".AddTransportationEmissionActivity"
+            android:name=".Activities.AddEmissionFromCategoryActivity"
             android:exported="true" />
         <activity
-            android:name=".AddEmissionActivity"
+            android:name=".Activities.AddEmissionActivity"
             android:exported="true" />
         <activity
-            android:name=".MainActivity"
+            android:name=".Activities.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

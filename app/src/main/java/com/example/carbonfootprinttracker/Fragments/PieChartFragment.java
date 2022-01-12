@@ -1,4 +1,4 @@
-package com.example.carbonfootprinttracker.Graphs;
+package com.example.carbonfootprinttracker.Fragments;
 
 import android.os.Bundle;
 
@@ -11,15 +11,15 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.example.carbonfootprinttracker.CustomGraphs.PieChart;
 import com.example.carbonfootprinttracker.R;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
- * A simple {@link Fragment} subclass.
- * Use the {@link PieChartFragment#newInstance} factory method to
- * create an instance of this fragment.
+ * Fragment contains PieChart, title and labels to use in MainActivity.
+ * Utku Sağocak
  */
 public class PieChartFragment extends Fragment implements Serializable {
 
@@ -88,9 +88,6 @@ public class PieChartFragment extends Fragment implements Serializable {
         label.setText(mLabel);
         chart.setText(mChartLabel);
 
-//        for(PieChart.PieSlice slice : mPieSlices) {
-//            chart.addPieSlice(slice);
-//        }
         chart.setPieSlices(mPieSlices);
     }
 }

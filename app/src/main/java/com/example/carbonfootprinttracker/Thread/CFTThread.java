@@ -1,5 +1,10 @@
-package com.example.carbonfootprinttracker;
+package com.example.carbonfootprinttracker.Thread;
 
+import com.example.carbonfootprinttracker.Models.CarbonFootprintTracker;
+
+/**
+ * Hüseyin Emre Arı
+ */
 public class CFTThread implements CFTRunnable {
     CarbonFootprintTracker app;
     private float dailyEmission;

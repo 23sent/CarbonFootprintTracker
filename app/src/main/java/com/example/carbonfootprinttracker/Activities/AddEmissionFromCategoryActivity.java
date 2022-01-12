@@ -1,4 +1,4 @@
-package com.example.carbonfootprinttracker;
+package com.example.carbonfootprinttracker.Activities;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
@@ -21,17 +21,22 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
-import android.widget.SpinnerAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import org.w3c.dom.Text;
+import com.example.carbonfootprinttracker.EmissionTypes;
+import com.example.carbonfootprinttracker.Models.CarbonFootprintTracker;
+import com.example.carbonfootprinttracker.Models.Emission;
+import com.example.carbonfootprinttracker.R;
 
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
 
-public class AddTransportationEmissionActivity extends AppCompatActivity {
+/**
+ * Utku Sağocak
+ */
+public class AddEmissionFromCategoryActivity extends AppCompatActivity {
     private EmissionTypes.Category category = EmissionTypes.Category.TRANSPORT;
 
     DatePickerFragment dataPickerFragment;

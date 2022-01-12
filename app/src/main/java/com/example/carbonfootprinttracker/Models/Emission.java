@@ -1,5 +1,7 @@
-package com.example.carbonfootprinttracker;
+package com.example.carbonfootprinttracker.Models;
 
+
+import com.example.carbonfootprinttracker.EmissionTypes;
 
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
@@ -7,6 +9,11 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.TimeZone;
 
+/**
+ * Emission model
+ *
+ * Utku Sağocak
+ */
 public class Emission implements Serializable {
     private float quantity = 0;
     private float carbonFootprint = 0;

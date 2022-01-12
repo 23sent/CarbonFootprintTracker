@@ -4,10 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ViewEmissionsActivity"
+    tools:context=".Activities.ViewEmissionsActivity"
     android:padding="20dp">
 
-    <com.example.carbonfootprinttracker.Graphs.LineGraph
+    <com.example.carbonfootprinttracker.CustomGraphs.LineGraph
         android:id="@+id/weekly_graph"
         android:layout_width="match_parent"
         android:layout_height="200dp"

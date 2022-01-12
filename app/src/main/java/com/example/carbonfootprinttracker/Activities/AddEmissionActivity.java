@@ -1,8 +1,7 @@
-package com.example.carbonfootprinttracker;
+package com.example.carbonfootprinttracker.Activities;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 
 import android.app.Activity;
 import android.content.Context;
@@ -18,13 +17,15 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
+import com.example.carbonfootprinttracker.Adapters.CategoryAdapter;
+import com.example.carbonfootprinttracker.EmissionTypes;
+import com.example.carbonfootprinttracker.R;
 
-public class AddEmissionActivity extends AppCompatActivity {
+/**
+ * Utku Sağocak
+ */
+public class AddEmissionActivity extends AppCompatActivity implements CategoryAdapter.CategoryAdapterListener {
     Button addTransportationBtn;
     Button addEnergyBtn;
     Button addAgricultureBtn;
@@ -49,51 +50,16 @@ public class AddEmissionActivity extends AppCompatActivity {
 
 
         ListView listview = (ListView) findViewById(R.id.categoryListView);
-        CategoryAdapter adapter = new CategoryAdapter(this, EmissionTypes.Category.values());
+        CategoryAdapter adapter = new CategoryAdapter(this, EmissionTypes.Category.values(), this);
         listview.setAdapter(adapter);
     }
 
-    private void startAddActivity(EmissionTypes.Category category) {
+    @Override
+    public void onClickCategory(EmissionTypes.Category category) {
         Bundle bundle = new Bundle();
         bundle.putSerializable("category", category);
-        Intent intent = new Intent(this, AddTransportationEmissionActivity.class);
+        Intent intent = new Intent(this, AddEmissionFromCategoryActivity.class);
         intent.putExtras(bundle);
         startActivity(intent);
-    }
-
-    public class CategoryAdapter extends BaseAdapter {
-        private LayoutInflater mInflater;
-        private EmissionTypes.Category[] categories;
-
-        public CategoryAdapter(Activity activity, EmissionTypes.Category[] categories) {
-            this.mInflater = (LayoutInflater) activity.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            this.categories = categories;
-        }
-
-        @Override
-        public int getCount() {
-            return categories.length;
-        }
-
-        @Override
-        public Object getItem(int i) {
-            return categories[i];
-        }
-
-        @Override
-        public long getItemId(int i) {
-            return i;
-        }
-
-        @Override
-        public View getView(int i, View view, ViewGroup viewGroup) {
-            Button rowView;
-            rowView = (Button) mInflater.inflate(R.layout.listview_button, null);
-            rowView.setText(categories[i].fullName);
-            rowView.setOnClickListener((View mView) -> {
-                startAddActivity(categories[i]);
-            });
-            return rowView;
-        }
     }
 }

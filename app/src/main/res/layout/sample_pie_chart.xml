@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <com.example.carbonfootprinttracker.Graphs.PieChart
+    <com.example.carbonfootprinttracker.CustomGraphs.PieChart
         style="@style/Widget.Theme.CarbonFootprintTracker.MyView"
         android:layout_width="300dp"
         android:layout_height="300dp"

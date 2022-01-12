@@ -1,17 +1,12 @@
-package com.example.carbonfootprinttracker.Graphs;
+package com.example.carbonfootprinttracker.CustomGraphs;
 
 import android.content.Context;
-import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Path;
-import android.graphics.drawable.Drawable;
-import android.text.TextPaint;
 import android.util.AttributeSet;
 import android.view.View;
-
-import com.example.carbonfootprinttracker.R;
 
 import java.util.ArrayList;
 import java.util.List;

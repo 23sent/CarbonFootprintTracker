@@ -1,4 +1,4 @@
-package com.example.carbonfootprinttracker;
+package com.example.carbonfootprinttracker.Adapters;
 
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -8,6 +8,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.carbonfootprinttracker.Fragments.EmissionsFragment;
+import com.example.carbonfootprinttracker.Models.Emission;
 import com.example.carbonfootprinttracker.databinding.EmissionFragmentItemBinding;
 
 import java.util.List;

@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".Graphs.PieChartFragment">
+    tools:context=".Fragments.PieChartFragment">
 
 
     <LinearLayout
@@ -25,7 +25,7 @@
             <!--                android:text="Header1"-->
             <!--                android:textSize="15dp"/>-->
 
-            <com.example.carbonfootprinttracker.Graphs.PieChart
+            <com.example.carbonfootprinttracker.CustomGraphs.PieChart
                 android:id="@+id/pie_chart"
                 android:layout_width="140dp"
                 android:layout_height="140dp"

@@ -1,12 +1,12 @@
-package com.example.carbonfootprinttracker;
+package com.example.carbonfootprinttracker.Database;
 
-import static com.example.carbonfootprinttracker.EmissionDBHelper.EmissionEntry.COLUMN_NAME_CATEGORY;
-import static com.example.carbonfootprinttracker.EmissionDBHelper.EmissionEntry.COLUMN_NAME_CREATED_AT;
-import static com.example.carbonfootprinttracker.EmissionDBHelper.EmissionEntry.COLUMN_NAME_ID;
-import static com.example.carbonfootprinttracker.EmissionDBHelper.EmissionEntry.COLUMN_NAME_PRODUCT_TYPE;
-import static com.example.carbonfootprinttracker.EmissionDBHelper.EmissionEntry.COLUMN_NAME_QUANTITY;
-import static com.example.carbonfootprinttracker.EmissionDBHelper.EmissionEntry.COLUMN_NAME_TOTAL;
-import static com.example.carbonfootprinttracker.EmissionDBHelper.EmissionEntry.TABLE_NAME;
+import static com.example.carbonfootprinttracker.Database.EmissionDBHelper.EmissionEntry.COLUMN_NAME_CATEGORY;
+import static com.example.carbonfootprinttracker.Database.EmissionDBHelper.EmissionEntry.COLUMN_NAME_CREATED_AT;
+import static com.example.carbonfootprinttracker.Database.EmissionDBHelper.EmissionEntry.COLUMN_NAME_ID;
+import static com.example.carbonfootprinttracker.Database.EmissionDBHelper.EmissionEntry.COLUMN_NAME_PRODUCT_TYPE;
+import static com.example.carbonfootprinttracker.Database.EmissionDBHelper.EmissionEntry.COLUMN_NAME_QUANTITY;
+import static com.example.carbonfootprinttracker.Database.EmissionDBHelper.EmissionEntry.COLUMN_NAME_TOTAL;
+import static com.example.carbonfootprinttracker.Database.EmissionDBHelper.EmissionEntry.TABLE_NAME;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -15,15 +15,17 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
+import com.example.carbonfootprinttracker.EmissionTypes;
+import com.example.carbonfootprinttracker.Models.Emission;
+
 import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.time.ZoneId;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 import java.util.Locale;
 
+/**
+ * Hüseyin Emre Arı
+ */
 public class EmissionDBHandler extends SQLiteOpenHelper {
     public static final int DB_VERSION = 1;
     public static final String DB_NAME = "emission.db";

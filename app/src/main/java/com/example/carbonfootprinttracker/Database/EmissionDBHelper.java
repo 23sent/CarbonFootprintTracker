@@ -1,7 +1,10 @@
-package com.example.carbonfootprinttracker;
+package com.example.carbonfootprinttracker.Database;
 
 import android.provider.BaseColumns;
 
+/**
+ * Hüseyin Emre Arı
+ */
 public final class EmissionDBHelper {
     private EmissionDBHelper() {}
 

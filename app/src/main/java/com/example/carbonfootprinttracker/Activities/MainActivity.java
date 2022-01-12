@@ -1,4 +1,4 @@
-package com.example.carbonfootprinttracker;
+package com.example.carbonfootprinttracker.Activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentTransaction;
@@ -10,12 +10,20 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
-import com.example.carbonfootprinttracker.Graphs.PieChart;
-import com.example.carbonfootprinttracker.Graphs.PieChartFragment;
+import com.example.carbonfootprinttracker.EmissionTypes;
+import com.example.carbonfootprinttracker.CustomGraphs.PieChart;
+import com.example.carbonfootprinttracker.Fragments.PieChartFragment;
+import com.example.carbonfootprinttracker.Models.CarbonFootprintTracker;
+import com.example.carbonfootprinttracker.R;
+import com.example.carbonfootprinttracker.Thread.CFTThread;
 
 import java.util.ArrayList;
 import java.util.Objects;
 
+/**
+ * Carbon Footprint Tracker Main Activity
+ * Utku Sağocak - Hüseyin Emre Arı
+ */
 public class MainActivity extends AppCompatActivity {
     static final String TAG = "MainActivity";
     Button addEmissionBtn;

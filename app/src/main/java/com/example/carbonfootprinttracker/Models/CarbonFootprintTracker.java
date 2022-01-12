@@ -1,6 +1,9 @@
-package com.example.carbonfootprinttracker;
+package com.example.carbonfootprinttracker.Models;
 
 import android.util.Log;
+
+import com.example.carbonfootprinttracker.CFTApp;
+import com.example.carbonfootprinttracker.Database.EmissionDBHandler;
 
 import java.time.LocalDate;
 import java.time.ZoneId;
@@ -8,10 +11,19 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Date;
 
+/**
+ * A model to access and manage all emission.
+ *
+ * Hüseyin Emre Arı
+ */
 public class CarbonFootprintTracker {
     private ArrayList<Emission> emissions;
     EmissionDBHandler dbHandler;
 
+    /**
+     * Singleton design
+     * Utku Sağocak
+     */
     private static CarbonFootprintTracker instance;
     private CarbonFootprintTracker() {
         emissions = new ArrayList<>();

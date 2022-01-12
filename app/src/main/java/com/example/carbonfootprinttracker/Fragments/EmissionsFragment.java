@@ -1,11 +1,10 @@
-package com.example.carbonfootprinttracker;
+package com.example.carbonfootprinttracker.Fragments;
 
 import android.content.Context;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -14,10 +13,16 @@ import android.view.View;
 import android.view.ViewGroup;
 
 
+import com.example.carbonfootprinttracker.Models.Emission;
+import com.example.carbonfootprinttracker.R;
+import com.example.carbonfootprinttracker.Adapters.ViewEmissionsRecyclerViewAdapter;
+
 import java.util.ArrayList;
 
 /**
- * A fragment representing a list of Items.
+ * A List fragment to show all emissions.
+ *
+ * Utku Sağocak
  */
 public class EmissionsFragment extends Fragment {
 
@@ -33,7 +38,6 @@ public class EmissionsFragment extends Fragment {
     public EmissionsFragment() {
     }
 
-    @SuppressWarnings("unused")
     public static EmissionsFragment newInstance(ArrayList<Emission> e) {
         EmissionsFragment fragment = new EmissionsFragment();
         Bundle args = new Bundle();

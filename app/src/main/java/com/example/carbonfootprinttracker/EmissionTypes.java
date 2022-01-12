@@ -7,6 +7,7 @@ import java.util.List;
  * Emission Types, Categories and Units
  * https://www.winnipeg.ca/finance/findata/matmgt/documents/2012/682-2012/682-2012_Appendix_H-WSTP_South_End_Plant_Process_Selection_Report/Appendix%207.pdf
  *
+ * Utku Sağocak
  */
 public class EmissionTypes {
 
@@ -18,8 +19,8 @@ public class EmissionTypes {
         M3("m3", "Consumption (cubic meter)"),
         KGCO2EQ("kgCo2-Eq", "Kg CO2-Equivalent");
 
-        String name;
-        String tag;
+        public final String name;
+        public final String tag;
 
         Unit(String n, String t) {
             this.name = n;
@@ -32,9 +33,9 @@ public class EmissionTypes {
         ENERGY("Natural Res.", "Energy & Natural Resources", R.drawable.ic_baseline_electricity_75),
         AGRICULTURE("Agriculture & Food", R.drawable.ic_baseline_food_75),
         CUSTOM("Custom Emission", R.drawable.ic_baseline_build_circle_70);
-        String name;
-        String fullName;
-        int imageResource;
+        public final String name;
+        public final String fullName;
+        public final int imageResource;
 
         Category(String name, String fullName, int img) {
             this.name = name;
@@ -63,10 +64,10 @@ public class EmissionTypes {
         NATURAL_GAS(Category.ENERGY, "Natural Gas", 0.21f, Unit.KWH),
         CUSTOM_EMISSION(Category.CUSTOM, "Emission", 1.0f, Unit.KGCO2EQ);
 
-        Category category;
-        String name;
-        float factor;
-        Unit unit;
+        public final Category category;
+        public final String name;
+        public final float factor;
+        public final Unit unit;
 
         Type(Category c, String n, float f, Unit u) {
             this.category = c;

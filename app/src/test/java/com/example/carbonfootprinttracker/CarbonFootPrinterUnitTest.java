@@ -4,10 +4,11 @@ import org.junit.Test;
 
 import static org.junit.Assert.*;
 
-import java.util.ArrayList;
-import java.util.Date;
+import com.example.carbonfootprinttracker.Models.CarbonFootprintTracker;
 
-
+/**
+ * Hüseyin Emre Arı
+ */
 public class CarbonFootPrinterUnitTest {
     @Test
     public void isEmissionToday_isCorrect() {

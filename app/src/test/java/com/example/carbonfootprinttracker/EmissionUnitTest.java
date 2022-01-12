@@ -2,12 +2,17 @@ package com.example.carbonfootprinttracker;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
+import com.example.carbonfootprinttracker.Models.Emission;
+
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.TimeZone;
 
+/**
+ * Utku Sağocak
+ */
 public class EmissionUnitTest {
     @Test
     public void getDateString_isCorrect() {
