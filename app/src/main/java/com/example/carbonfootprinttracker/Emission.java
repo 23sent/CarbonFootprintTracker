@@ -1,12 +1,11 @@
 package com.example.carbonfootprinttracker;
 
-import android.widget.Toast;
 
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
+import java.util.TimeZone;
 
 public class Emission implements Serializable {
     private float quantity = 0;
@@ -16,7 +15,7 @@ public class Emission implements Serializable {
     private long id;
 
     public Emission() {
-        setDate(Calendar.getInstance().getTime());
+        setDate(GregorianCalendar.getInstance(TimeZone.getDefault()).getTime());
         calculateCarbonFootprint();
     }
 
@@ -26,6 +25,7 @@ public class Emission implements Serializable {
         this.carbonFootprint = carbonFootprint;
         this.date = date;
         this.type = type;
+        calculateCarbonFootprint();
     }
 
     public void setQuantity(float quantity) {
@@ -48,7 +48,6 @@ public class Emission implements Serializable {
 
     public void setDate(Date d) {
         this.date = d;
-        Toast.makeText(CFTApp.getContext(), getDateString(), Toast.LENGTH_SHORT).show();
     }
 
     public Date getDate() {
@@ -77,6 +76,8 @@ public class Emission implements Serializable {
 
     public String getDateString(String format) {
         SimpleDateFormat sdf = new SimpleDateFormat(format);
+//        final DateTimeFormatter dtf = DateTimeFormatter.ofPattern(format);
+//        final LocalDate emissionCreatedDate = LocalDate.parse(this.date, dtf);
         if (this.date != null) {
             return sdf.format(this.date);
         }

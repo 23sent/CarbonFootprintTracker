@@ -14,9 +14,6 @@
             android:name=".EmissionDetails"
             android:exported="true" />
         <activity
-            android:name=".AddEnergyEmissionActivity"
-            android:exported="false" />
-        <activity
             android:name=".ViewEmissionsActivity"
             android:exported="true" />
         <activity

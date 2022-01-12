@@ -75,7 +75,9 @@ public class AddTransportationEmissionActivity extends AppCompatActivity {
         carbonEmissionTxt = (TextView) findViewById(R.id.carbonEmissionTxt);
         typeSpinner = (Spinner) findViewById(R.id.transportTypeSpinner);
 
-        setDateTxt(emission.getDate().getYear(), emission.getDate().getMonth(), emission.getDate().getDay());
+        GregorianCalendar calendar = new GregorianCalendar();
+        calendar.setTime(emission.getDate());
+        setDateTxt(calendar.get(GregorianCalendar.YEAR), calendar.get(GregorianCalendar.MONTH), calendar.get(GregorianCalendar.DAY_OF_MONTH));
 
         dataPickerFragment = new DatePickerFragment((DatePicker view, int year, int month, int day) -> {
             setDateTxt(year, month, day);
