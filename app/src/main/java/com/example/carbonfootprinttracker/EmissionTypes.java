@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Emission Types, Categories and Units
+ * Emission Types, Categories and Units Enums and helper methods
  * https://www.winnipeg.ca/finance/findata/matmgt/documents/2012/682-2012/682-2012_Appendix_H-WSTP_South_End_Plant_Process_Selection_Report/Appendix%207.pdf
  *
  * Utku Sağocak
@@ -14,6 +14,7 @@ public class EmissionTypes {
     public enum Unit {
         KM("km", "Distance (km)"),
         KG("kg", "Consumption (kg)"),
+        GRAM("gram", "Consumption (g)"),
         HOURS("hours", "Duration (h)"),
         KWH("kWh", "Consumption (kWh)"),
         M3("m3", "Consumption (cubic meter)"),
@@ -55,9 +56,9 @@ public class EmissionTypes {
         PLANE(Category.TRANSPORT, "Plane", 0.00034f * 60, Unit.HOURS),
         CAR(Category.TRANSPORT, "Car", 0.19f, Unit.KM),
 
-        RED_MEAT(Category.AGRICULTURE, "Red Meat", (39.2f + 27.0f) / 2f, Unit.KG),
-        WHITE_MEAT(Category.AGRICULTURE, "White Meat", 6.9f, Unit.KG),
-        FISH(Category.AGRICULTURE, "Fish", 6.1f, Unit.KG),
+        RED_MEAT(Category.AGRICULTURE, "Red Meat", (39.2f + 27.0f) / 2f / 1000f, Unit.GRAM),
+        WHITE_MEAT(Category.AGRICULTURE, "White Meat", 6.9f / 1000f, Unit.GRAM),
+        FISH(Category.AGRICULTURE, "Fish", 6.1f / 1000f, Unit.GRAM),
 
         ELECTRICITY(Category.ENERGY, "Electricity", 0.394f, Unit.KWH),
         WATER(Category.ENERGY, "Water", 0.32f, Unit.M3),

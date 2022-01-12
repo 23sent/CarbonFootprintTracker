@@ -107,7 +107,12 @@ public class AddEmissionFromCategoryActivity extends AppCompatActivity {
             public void afterTextChanged(Editable s) {
                 String quantityString = s.toString();
                 if (!quantityString.trim().isEmpty()) {
-                    float quantity = Float.parseFloat(quantityString);
+                    float quantity;
+                    try {
+                        quantity = Float.parseFloat(quantityString);
+                    } catch (NumberFormatException e) {
+                        return;
+                    }
                     emission.setQuantity(quantity);
                 } else {
                     emission.setQuantity(0);
