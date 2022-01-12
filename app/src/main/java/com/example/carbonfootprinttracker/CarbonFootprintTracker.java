@@ -43,7 +43,7 @@ public class CarbonFootprintTracker {
 
     }
 
-    public boolean isEmissionToday(String emissionDate) {
+    public static boolean isEmissionToday(String emissionDate) {
         if (emissionDate == null) {
             return false;
         }
@@ -58,7 +58,7 @@ public class CarbonFootprintTracker {
         return emissionCreatedDate.isBefore(nextDay) && emissionCreatedDate.isAfter(previousDay);
     }
 
-    public boolean isEmissionThisMonth(String emissionDate) {
+    public static boolean isEmissionThisMonth(String emissionDate) {
         if (emissionDate == null) {
             return false;
         }
@@ -73,7 +73,7 @@ public class CarbonFootprintTracker {
         return emissionCreatedDate.isBefore(nextMonth) && emissionCreatedDate.isAfter(previousMonth);
     }
 
-    public boolean isEmissionPreviousMonth(String emissionDate) {
+    public static boolean isEmissionPreviousMonth(String emissionDate) {
         if (emissionDate == null) {
             return false;
         }
