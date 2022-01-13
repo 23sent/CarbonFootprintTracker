@@ -56,7 +56,7 @@ public class AddEmissionFromCategoryActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_add_transportation_emission);
+        setContentView(R.layout.activity_add_emission_from_category);
         category = (EmissionTypes.Category) getIntent().getExtras().getSerializable("category");
         emissionTypes = EmissionTypes.getTypes(category);
 
